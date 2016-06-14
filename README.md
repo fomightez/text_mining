@@ -15,7 +15,7 @@ Note, if using with yeast genes, probably best to use my script `geneID_list_to_
 ---
 
 -`find_overlap_in_lists_with_Venn.py`
->  lists --> list of shared items  
+>  lists --> list of shared items and a diagram showing relationships between lists  
 Like `find_overlap_in_lists.py` but for comparisons involving 2, 3, or 4 list documents it produces a Venn diagram depicting the relationships of the items in the lists.
 
 Requires `venn4_from_github.py` (see below) in the same directory to produce a Venn diagram for comparing lists found in four separate documents.
