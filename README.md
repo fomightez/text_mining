@@ -1,5 +1,5 @@
 # text_mining
-general text mining Python scripts
+general text mining and text manipulation Python scripts
 
 
 
