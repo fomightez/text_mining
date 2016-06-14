@@ -11,7 +11,7 @@
 # DEPENDENCIES:
 # typical modules like argparse, os
 #
-# Purpose: extracts lines with matching in them from files in a folder.
+# Purpose: extracts lines with matching text in them from files in a folder.
 # It outputs the matching lines to a single file.
 # In regards to the text to match on each line, it is oblivious to case.
 '''
