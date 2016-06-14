@@ -38,3 +38,14 @@ For the current version, the text of interest to match and the file name constra
 > slightly modified from the original by Kristoffer Sahlin [here](https://github.com/ksahlin/pyinfor/blob/master/venn.py) to be used with `find_overlap_in_lists_with_Venn.py`  
 
 
+
+Related scripts
+---------------
+
+Since data mining and text manipulations are at the heart of most of my computational endeavors, several other of my code repositories hold code related to text mining/text manipulation. Here are some:
+
+- [My YeastMine code repository](https://github.com/fomightez/yeastmine) 
+
+- [My sequence work repository](https://github.com/fomightez/sequencework)
+
+- [My structure work repository](https://github.com/fomightez/structurework)
