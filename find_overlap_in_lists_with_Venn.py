@@ -36,6 +36,9 @@
 # Dependencies beyond the mostly standard libraries/modules:
 # If comparing four lists it will need the additional script `venn4_from_github.py`
 # and pylab
+# In fact it will not work to produce a Venn diagram when run on mybinder.org
+# because of issues with `matplotlib` despite the fact the image is set to be
+# saved as a file be default.
 #
 #
 #
