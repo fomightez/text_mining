@@ -26,7 +26,7 @@
 # Note, if using with yeast genes, probably best to use my script
 # `geneID_list_to_systematic_names.py` to convert all to yeast systematic
 # names so that the lists are standardized before running
-# `find_overlap_in_lists.py`.
+# `find_overlap_in_lists_with_Venn.py`.
 #
 #
 #
@@ -307,6 +307,11 @@ no_diagram = args.skipdiagram
 
 ###-----------------Actual Main portion of script---------------------------###
 
+# warn if only one file provided
+if len(list_files_to_analyze_list) == 1:
+    sys.stderr.write( "\n***WARNING***. Hard to check for overlap between lists, when given only one list.\nForget to add others? By default overlap equals provided list...\n")
+
+
 # Go through each file making a list of the items
 list_of_items_in_each_item_list=[]
 for each_item_list_file in list_files_to_analyze_list:
@@ -353,7 +358,7 @@ if len(shared_items) > 0:
     # Originally could only handle where 2 or 3 lists for making representation due
     # to limit in standard Venn code. I have now tried adding a basic,
     # non-area-weighted output for 4 too. See the function for more info.
-    if (len(list_of_items_in_each_item_list) >  0) and (
+    if (len(list_of_items_in_each_item_list) >  1) and (
         len(list_of_items_in_each_item_list) < 5) and not no_diagram:
         knights_of_Venn_it(list_of_items_in_each_item_list, shared_items)
 
