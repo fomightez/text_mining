@@ -175,6 +175,11 @@ keeping_case = args.nochange
 
 ###-----------------Actual Main portion of script---------------------------###
 
+# warn if only one file provided
+if len(list_files_to_analyze_list) == 1:
+    sys.stderr.write( "\n***WARNING***. Hard to check for overlap between lists, when given only one list.\nForget to add others? By default overlap equals provided list...\n")
+
+
 # Go through each file making a list of the items
 list_of_items_in_each_item_list=[]
 for each_item_list_file in list_files_to_analyze_list:
