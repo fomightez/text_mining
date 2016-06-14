@@ -4,6 +4,16 @@ my general text mining and text manipulation Python scripts
 
 
 ## Description of each script
+
+- `find_overlap_in_lists.py`
+
+> Takes files with items listed one item to a line and determines items that occur in all the lists. Thus, it identifies only those items shared by all the lists of items. It was intended to be used for lists of genes, it but can work for any type of list with the caveat that the case of the shared items will be converted to all uppercase in the produced results unless an optional flag `--nochange` is used to override this change which is done to make comparison more robust.  
+A file listing the shared items (genes) will be produced.  
+Note, if using with yeast genes, probably best to use my script `geneID_list_to_systematic_names.py` to convert all to yeast systematic names so that the lists are standardized before running `find_overlap_in_lists.py`.
+
+---
+
+
 - `pull_MATCHING_data_from_files_in_directory.py`
 
 > pertinent lines in several files --> all those lines in one file  
