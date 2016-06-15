@@ -28,13 +28,13 @@ Note: this will not work to produce a Venn diagram on [mybinder.org](http://mybi
 **example of input and output for `find_overlap_in_lists_with_Venn.py`:**
 
 original input:  
-(text in three files with each column below representing a file)
+(text in three files with each column below representing contents of a file)
 ```
-YDr190C                     YPR366C
-YPL235W                     YDR190C
-YLR366c                     YPL235W
-urgOu                       YLR466C
-SVLVASGYRHNITSVSQ           urgou
+YDr190C                     YPR366C                 YDR112C
+YPL235W                     YDR190C                 YDR190C
+YLR366c                     YPL235W                 YPL235W
+urgOu                       YLR466C                 YLR356C
+SVLVASGYRHNITSVSQ           urgou                   SVLVASGYRHNITSVSQ
                             SVLVASGYRHNITSVSQ
 
 
@@ -44,29 +44,17 @@ command:
 
   python find_overlap_in_lists_with_Venn.py list1.txt list2.txt list3.txt   
 
-output after:
+output after:  
+(text in a file, called `list1_and_2others_shared_items.txt` , with the contents below)
 ```
->gi|392920960|ref|NM_073597.2| Caenorhabditis elegans Protein FLR-2 (flr-2) mRNA, complete cds
-AUGGGCUCCAAAGCACGAGCACGACGACGUUUAAGUUGUUUUUUAAGCGUUUUUGUUGUGACAUGCUUAU
-UACAGUACUGCACAGCAGGUGUUACUAAGAAUAAUAGUUGCAAAAAAGUUGGAGUGGAGGAACUUAUAGA
-UGAAGAAGGCUGUGAUUUGAUGAUAAUUCGAAUCAAUCGAUGCAGUGGGCAUUGCUUCUCAUUUACAUUU
-CCUAAUCCCUUAACGAAAAAAUAUUCAGUGCAUGCGAAGUGCUGCCGGAUGGUUGAAUGGGAAAUGCUUG
-AAACAGAAUUAAAAUGUUCCAAAGGAAACCGAAAUCUUCGAAUACCAUCUGCAACACAAUGUGAAUGUUU
-UGAUUGUCUUGUUCGAUAG
-
->gi|XM_003122551.1:0-390(+) PREDICTED: glycoprotein hormone alpha-2-like [Sus scrofa] mRNA cds , corresponds to cds for protein sequence GI_number 311247365
-AUGCCCAUGGCCUCCCCCCAAACCCUGCUCCUCUGCCUGCUGGUCCUGGCAAUCCCUGAA
-GGCCAGGGUCAGCAGGCAGCCAUCCCAGGCUGCCACUUGCACCCCUUCAACGUGACCGUG
-CGAAGUGACCGCCAAGGCACCUGCCAGGGCUCCCAUGUGGCACAGGCCUGUGUGGGCCAC
-UGUGAGUCCAGUGCCUUCCCAUCCCGGUACUCCGUGCUGGUGGCCAGCGGCUAUCGACAC
-AACAUCACCUCCGUCUCUCAGUGCUGCACCAUCAGCAGCCUGAGGAAGGUGAAGGUGCAG
-CUGCACUGUGGGGGGGACCGGAGGGAGGAGCUGGAGAUCUUCACGGCCAGGGCCUGCCAG
-UGCGACAUGUGUCGCCUCUCACGCUACUAG
+YDr190C
+YPL235W
+SVLVASGYRHNITSVSQCCTISSLRKVKVQLHCGGDRReELEIFTARACQCDMCRLSRY
 
 
 ```
-
-ADD IMAGE OF VENN DIAGRAM OUTPUT HERE
+(image file called `list1_and_2others_overlap_representation.png`)
+[!list1_and_2others_overlap_representation.png]
 
 ---
 
