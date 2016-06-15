@@ -1,11 +1,11 @@
 # text_mining
-**My general text mining and text manipulation Python scripts.
+**My general text mining and text manipulation Python scripts.**
 
 ---
 
 
 
-### Description of each script
+**Description of each script**
 
 - `find_overlap_in_lists.py`
 
