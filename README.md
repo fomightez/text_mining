@@ -42,7 +42,7 @@ SVLVASGYRHNITSVSQ           urgou                   SVLVASGYRHNITSVSQ
 
 command:
 
-  python find_overlap_in_lists_with_Venn.py list1.txt list2.txt list3.txt   
+    python find_overlap_in_lists_with_Venn.py list1.txt list2.txt list3.txt   
 
 output after:  
 (text in a file, called `list1_and_2others_shared_items.txt` , with the contents below)
@@ -53,7 +53,7 @@ SVLVASGYRHNITSVSQCCTISSLRKVKVQLHCGGDRReELEIFTARACQCDMCRLSRY
 
 
 ```
-(image file called `list1_and_2others_overlap_representation.png`)
+(image file called `list1_and_2others_overlap_representation.png`)  
 [!list1_and_2others_overlap_representation.png]
 
 ---
