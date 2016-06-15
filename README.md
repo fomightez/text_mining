@@ -27,7 +27,7 @@ Note: this will not work to produce a Venn diagram on [mybinder.org](http://mybi
 
 **example of input and output for `find_overlap_in_lists_with_Venn.py`:**
 
-original input:  
+**original input:**  
 (text in three files with each column below representing contents of a file)
 ```
 YDr190C                     YPR366C                 YDR112C
@@ -44,7 +44,7 @@ command:
 
     python find_overlap_in_lists_with_Venn.py list1.txt list2.txt list3.txt   
 
-output after:  
+**output after:**  
 (text in a file, called `list1_and_2others_shared_items.txt` , with the contents below)
 ```
 YDr190C
@@ -54,7 +54,7 @@ SVLVASGYRHNITSVSQCCTISSLRKVKVQLHCGGDRReELEIFTARACQCDMCRLSRY
 
 ```
 (image file called `list1_and_2others_overlap_representation.png`)  
-[!list1_and_2others_overlap_representation.png]
+![diagram example](list1_and_2others_overlap_representation.png)
 
 ---
 
