@@ -8,8 +8,10 @@ my general text mining and text manipulation Python scripts
 - `find_overlap_in_lists.py`
 
 > lists --> list of shared items  
-Takes files with items listed one item to a line and determines items that occur in all the lists. Thus, it identifies only those items shared by all the lists of items. It was intended to be used for lists of genes, it but can work for any type of list with the caveat that the case of the shared items will be converted to all uppercase in the produced results unless an optional flag `--nochange` is used to override this change which is done to make comparison more robust.  
+Takes files with items listed one item to a line and determines items that occur in all the lists. Thus, it identifies only those items shared by all the lists of items. It was intended to be used for lists of genes, it but can work for any type of list.  
 A file listing the shared items (genes) will be produced.  
+The default settings cause the comparisons to be case-insensitive with the caveat that the case of the shared items listed in the output file will be determined by whatever list is provided in the first position of the file name list when calling the script.  
+Matching independent of case is done by default to make the comparisons more robust. The optional flag `--sensitive` can be used to override that behavior and make the comparisons case-sensitive. For case-sensitive matching, the order of the files when the script is called makes no difference as only perfect matches for all input lists will be in the output file.
 Note, if using with yeast genes, probably best to use my script `geneID_list_to_systematic_names.py`, found in [my yeastmine-related code repository](https://github.com/fomightez/yeastmine) to convert all to yeast systematic names so that the lists are standardized before running `find_overlap_in_lists.py`.  
 A related script, `find_overlap_in_lists_with_Venn.py`, will do all this script will do plus when comparing 2, 3, or 4 lists it depict the relationships among the lists in a Venn diagram.
 
@@ -20,6 +22,52 @@ A related script, `find_overlap_in_lists_with_Venn.py`, will do all this script 
 Like `find_overlap_in_lists.py` (see above) but for comparisons involving 2, 3, or 4 list documents it produces in an image file a Venn diagram depicting the relationships of the items in the lists.  
 To produce a Venn diagram for comparing lists found in four separate documents, it requires `venn4_from_github.py` (see below) in the same directory. This additional script is not needed in the cases comparing two or three lists.  
 Note: this will not work to produce a Venn diagram on [mybinder.org](http://mybinder.org) because issues with `matplotlib` despite the fact the image is set to be saved as a file by default.
+
+**example of input and output for `find_overlap_in_lists_with_Venn.py`:**
+
+original input:
+```
+>gi|392920960|ref|NM_073597.2| Caenorhabditis elegans Protein FLR-2 (flr-2) mRNA, complete cds
+ATGGGCTCCAAAGCACGAGCACGACGACGTTTAAGTTGTTTTTTAAGCGTTTTTGTTGTGACATGCTTAT
+TACAGTACTGCACAGCAGGTGTTACTAAGAATAATAGTTGCAAAAAAGTTGGAGTGGAGGAACTTATAGA
+TGAAGAAGGCTGTGATTTGATGATAATTCGAATCAATCGATGCAGTGGGCATTGCTTCTCATTTACATTT
+CCTAATCCCTTAACGAAAAAATATTCAGTGCATGCGAAGTGCTGCCGGATGGTTGAATGGGAAATGCTTG
+AAACAGAATTAAAATGTTCCAAAGGAAACCGAAATCTTCGAATACCATCTGCAACACAATGTGAATGTTT
+TGATTGTCTTGTTCGATAG
+
+>gi|XM_003122551.1:0-390(+) PREDICTED: glycoprotein hormone alpha-2-like [Sus scrofa] mRNA cds , corresponds to cds for protein sequence GI_number 311247365
+ATGCCCATGGCCTCCCCCCAAACCCTGCTCCTCTGCCTGCTGGTCCTGGCAATCCCTGAA
+GGCCAGGGTCAGCAGGCAGCCATCCCAGGCTGCCACTTGCACCCCTTCAACGTGACCGTG
+CGAAGTGACCGCCAAGGCACCTGCCAGGGCTCCCATGTGGCACAGGCCTGTGTGGGCCAC
+TGTGAGTCCAGTGCCTTCCCATCCCGGTACTCCGTGCTGGTGGCCAGCGGCTATCGACAC
+AACATCACCTCCGTCTCTCAGTGCTGCACCATCAGCAGCCTGAGGAAGGTGAAGGTGCAG
+CTGCACTGTGGGGGGGACCGGAGGGAGGAGCTGGAGATCTTCACGGCCAGGGCCTGCCAG
+TGCGACATGTGTCGCCTCTCACGCTACTAG
+```
+
+output after:
+```
+>gi|392920960|ref|NM_073597.2| Caenorhabditis elegans Protein FLR-2 (flr-2) mRNA, complete cds
+AUGGGCUCCAAAGCACGAGCACGACGACGUUUAAGUUGUUUUUUAAGCGUUUUUGUUGUGACAUGCUUAU
+UACAGUACUGCACAGCAGGUGUUACUAAGAAUAAUAGUUGCAAAAAAGUUGGAGUGGAGGAACUUAUAGA
+UGAAGAAGGCUGUGAUUUGAUGAUAAUUCGAAUCAAUCGAUGCAGUGGGCAUUGCUUCUCAUUUACAUUU
+CCUAAUCCCUUAACGAAAAAAUAUUCAGUGCAUGCGAAGUGCUGCCGGAUGGUUGAAUGGGAAAUGCUUG
+AAACAGAAUUAAAAUGUUCCAAAGGAAACCGAAAUCUUCGAAUACCAUCUGCAACACAAUGUGAAUGUUU
+UGAUUGUCUUGUUCGAUAG
+
+>gi|XM_003122551.1:0-390(+) PREDICTED: glycoprotein hormone alpha-2-like [Sus scrofa] mRNA cds , corresponds to cds for protein sequence GI_number 311247365
+AUGCCCAUGGCCUCCCCCCAAACCCUGCUCCUCUGCCUGCUGGUCCUGGCAAUCCCUGAA
+GGCCAGGGUCAGCAGGCAGCCAUCCCAGGCUGCCACUUGCACCCCUUCAACGUGACCGUG
+CGAAGUGACCGCCAAGGCACCUGCCAGGGCUCCCAUGUGGCACAGGCCUGUGUGGGCCAC
+UGUGAGUCCAGUGCCUUCCCAUCCCGGUACUCCGUGCUGGUGGCCAGCGGCUAUCGACAC
+AACAUCACCUCCGUCUCUCAGUGCUGCACCAUCAGCAGCCUGAGGAAGGUGAAGGUGCAG
+CUGCACUGUGGGGGGGACCGGAGGGAGGAGCUGGAGAUCUUCACGGCCAGGGCCUGCCAG
+UGCGACAUGUGUCGCCUCUCACGCUACUAG
+
+
+```
+
+ADD IMAGE OF VENN DIAGRAM OUTPUT HERE
 
 ---
 
