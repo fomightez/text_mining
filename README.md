@@ -17,7 +17,7 @@ Note: this will not work to produce a Venn diagram on [mybinder.org](http://mybi
 
 **Usage**  
 
-'''
+```
 usage:  find_overlap_in_lists.py [-h] [-s] [-n] Files [Files ...]
 find_overlap_in_lists.py takes any number of files of lists with items on
 separate lines and reports those items shared by all. It was originally
@@ -39,7 +39,7 @@ optional arguments:
   -n, --nodiagram  add this flag to force not making any Venn diagram. (Or you
                    could just use my script 'find_overlap_in_lists.py' that
                    does the same without producing a diagram.)
-'''
+```
 
 **example of input and output for `find_overlap_in_lists_with_Venn.py`:**
 
@@ -96,7 +96,7 @@ A related script, `find_overlap_in_lists_with_Venn.py`, (see above) will do all 
 
 **Usage**  
 
-'''
+```
 usage:  find_overlap_in_lists.py [-h] [-s] Files [Files ...]
 find_overlap_in_lists.py takes any number of files of lists with items on
 separate lines and reports those items shared by all. It was originally
@@ -112,7 +112,7 @@ optional arguments:
                    make the comparisons independent of character case in order
                    make matching more robust, and not miss matches when case
                    use is inconsistent among the lists.
-'''
+```
 
 **example of input and output for `find_overlap_in_lists.py`:**
 
