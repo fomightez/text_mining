@@ -8,10 +8,12 @@
 # PURPOSE: Takes files with items listed one item to a line and determines items
 # that occur in all the lists. Thus, it identifies only those items shared by
 # all the lists of items. It was intended to be used for lists of genes but can
-# work for any type of list with the caveat that the case of the shared items
-# will be converted to all uppercase in the produced results unless an optional
-# flag `--nochange` is used to override this change which is done to make
-# comparison more robust.
+# work for any type of list. The default settings cause the comparisons to be
+# case-insensitive with the caveat that the case of the shared items will be
+# set by whatever list is provided in the first position when calling the script.
+# Matching  independent of case is done to make the comparisons more robust.
+# The optional flag `--sensitive` can be used to override that behavior and make
+# the comparisons case-sensitive.
 #
 # A file listing the shared items (genes) will be saved in the same directory
 # in which the script finds the first file.
@@ -103,15 +105,26 @@ def generate_output_file_name(file_name):
     ================
     Calling function with
         ("file1.txt")
+    when `list_files_to_analyze_list` contains 3 file names
     returns
-        "file1_and_others_shared_items.txt"
+        "file1_and_3others_shared_items.txt"
     '''
     main_part_of_name, file_extension = os.path.splitext(
         file_name) #from http://stackoverflow.com/questions/541390/extracting-extension-from-filename-in-python
-    if '.' in file_name:  #I don't know if this is needed with the os.path.splitext method but I had it before so left it
-        return main_part_of_name + "_and_others_shared_items" + file_extension
+    if len(list_files_to_analyze_list) == 2:
+        base_name_without_extension_second_file = os.path.splitext(
+            os.path.basename(list_files_to_analyze_list[1]))[0]
+        if '.' in file_name:  #I don't know if this is needed with the os.path.splitext method but I had it before so left it
+            return main_part_of_name + "_and_"+ base_name_without_extension_second_file +"_shared_items" + file_extension
+        else:
+            return file_name + "_and_"+ base_name_without_extension_second_file +"_shared_items"
     else:
-        return file_name + "_and_others_shared_items"
+        if '.' in file_name:  #I don't know if this is needed with the os.path.splitext method but I had it before so left it
+            return main_part_of_name + "_and_"+ str(len(
+                list_files_to_analyze_list) - 1) +"others_shared_items" + file_extension
+        else:
+            return file_name + "_and_"+ str(len(
+                list_files_to_analyze_list) - 1) +"others_shared_items"
 
 def generate_output_file(provided_text):
     '''
@@ -157,11 +170,11 @@ parser = argparse.ArgumentParser(prog=' find_overlap_in_lists.py',description=" 
 parser.add_argument("Files", help="Names of files containing lists to compare. AT LEAST ONE REQUIRED.", nargs="+")
 # see http://stackoverflow.com/questions/13219910/argparse-get-undefined-number-of-arguments
 # for hot last line allowd any number of files to be used.
-parser.add_argument("-n", "--nochange",help=
-    "add this flag to force no change of case for items (NOT recommended). \
-    Default (recommended) is to change the case to uppercase to make \
-    comparisons more robust. Note that not changing the case may result in \
-    missing some matches if case use inconsistent in the lists.",
+parser.add_argument("-s", "--sensitive",help=
+    "add this flag to force comparison of items to be case-sensitive (NOT \
+    recommended). Default (recommended) is to make the comparisons independent \
+    of character case in order make matching more robust, and not miss matches \
+    when case use is inconsistent among the lists.",
     action="store_true")
 #I would also like trigger help to display if no arguments provided because need at least one input file
 if len(sys.argv)==1:    #from http://stackoverflow.com/questions/4042452/display-help-message-with-python-argparse-when-script-is-called-without-any-argu
@@ -169,7 +182,7 @@ if len(sys.argv)==1:    #from http://stackoverflow.com/questions/4042452/display
     sys.exit(1)
 args = parser.parse_args()
 list_files_to_analyze_list = args.Files
-keeping_case = args.nochange
+case_sensitive = args.sensitive
 
 
 
@@ -182,23 +195,30 @@ if len(list_files_to_analyze_list) == 1:
 
 # Go through each file making a list of the items
 list_of_items_in_each_item_list=[]
+case_resolving_dictionary = {} # to be used unless `case_sensitive` flag set
 for each_item_list_file in list_files_to_analyze_list:
     input_file_stream = open(each_item_list_file , "r")
     file_items_list= []
     for line in input_file_stream:
-        file_items_list.append(line.strip())  # don't want line endings so I can easily
+        line = line.strip() #  # don't want line endings so I can easily
         # manipulate later, hence the use of `.strip()`
+        file_items_list.append(line)
+        # For first file, collect the lines for the conversion dictionary to
+        # restore the case later.
+        if each_item_list_file == list_files_to_analyze_list[0]:
+            case_resolving_dictionary[line.upper()] = line
     #Completed scan of input file and therefore close file and add item list to list of item lists
     input_file_stream.close()
 
     # Changing case of all items in the list will make comparisons more robust,
-    # but this may not be desired in all cases. Plus because of the simple
-    # implementation being used will the process will result in output where
-    # all capitalized and this also may not be desired and so there is way to
-    # override the case change. Note though that not changing the case may result
-    # in missing some matches if case use inconsistent in the lists.
+    # but this may not be desired in all cases. Because of the simple
+    # implementation being used, the process will result in output where
+    # case used in first provided file us used. This behavior also may not be
+    # desired and so there is way to override the case independence of the
+    # comparisons. Note though that making the comparisons sensitive to case may
+    # result in missing some matches if case use inconsistent in the lists.
     #
-    if not keeping_case:
+    if not case_sensitive:
         file_items_list = [x.upper() for x in file_items_list]
 
 
@@ -207,15 +227,32 @@ for each_item_list_file in list_files_to_analyze_list:
     # used in the main function.
 
 # Warn about case issue. (But not in a loop.)
-if keeping_case:
-    sys.stderr.write( "\n***WARNING***. Be aware using `--nochange` option may result in missing matches if case inconsistent in lists. ***WARNING***\n")
+if case_sensitive:
+    sys.stderr.write( "\n***NOTICE***. Be aware using `--senstiive` option may result in missing matches if case use inconsistent in lists. ***NOTICE***\n")
 
 # Now determine items that occur in ALL the item lists, i.e., the overlap
 shared_items = set.intersection(*list_of_items_in_each_item_list) # see http://stackoverflow.com/questions/2541752/how-best-do-i-find-the-intersection-of-multiple-sets-in-python
 
+# if there was overlap identified handle the generating the output
 if len(shared_items) > 0:
+    # Before making output, if comparisons were case-insensitive (the default),
+    # convert items all changed to uppercase for robustness of comparison back
+    # to the case found in the first file provided when calling the script.
+    if not case_sensitive:
+        shared_items_case_restored = [] # List to store case restored list to not
+        # change list while iterating.
+        for each_item in shared_items:
+            shared_items_case_restored.append(case_resolving_dictionary[each_item])
+        # with list of items restored to match case of original input in hand,
+        # now set the shared_items set to this.
+        shared_items = set(shared_items_case_restored)
+
+
+
     # Make the list easily made into an output file by separating each with a new line
     text_to_save = list2text(shared_items)
+
+
 
 
     # Save results
