@@ -36,6 +36,16 @@ YLR366c                     YpL235W                 YPL235w
 urgOu                       YLR466C                 YLR356C
 SVLVASGYRHNITSVSQ           urgou                   SVLVASGYRHNITSVSQ
                             SVLVASGYRHNITSVSQ
+                            YBR845C
+                            YDR772W
+                            YDL013W
+                            YDL206W
+                            YLR173W
+                            YOR246C
+                            YAL047C
+                            YFL037W
+                            YLR200W
+                            YML124C
 
 
 ```
