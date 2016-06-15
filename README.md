@@ -24,11 +24,13 @@ separate lines and reports those items shared by all. It was originally
 intended to be used for lists of genes, but works on any lists. When comparing
 2, 3, or four lists to each other, a Venn diagram depicting the relationship
 of the lists will be made. Only the output for two or three lists will be an
-area-weighted diagram.**** Script by Wayne Decatur (fomightez @ github) ***
+area-weighted diagram.**** Script by Wayne Decatur (fomightez @ github) ***  
+
 positional arguments:
   Files            List the names of FILES containing the lists to compare. AT
                    LEAST ONE IS REQUIRED. Of course, it makes more sense with
-                   two or more.
+                   two or more.  
+                   
 optional arguments:
   -h, --help       show this help message and exit
   -s, --sensitive  add this flag to force comparison of items to be case-
@@ -101,10 +103,12 @@ usage:  find_overlap_in_lists.py [-h] [-s] Files [Files ...]
 find_overlap_in_lists.py takes any number of files of lists with items on
 separate lines and reports those items shared by all. It was originally
 intended to be used for lists of genes, but works on any lists. **** Script by
-Wayne Decatur (fomightez @ github) ***
+Wayne Decatur (fomightez @ github) ***  
+
 positional arguments:
   Files            Names of files containing lists to compare. AT LEAST ONE
-                   REQUIRED.
+                   REQUIRED.  
+                   
 optional arguments:
   -h, --help       show this help message and exit
   -s, --sensitive  add this flag to force comparison of items to be case-
