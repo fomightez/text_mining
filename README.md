@@ -15,6 +15,32 @@ Like `find_overlap_in_lists.py` (see below) but for comparisons involving 2, 3, 
 To produce a Venn diagram for comparing lists found in four separate documents, it requires `venn4_from_github.py` (see below) in the same directory. This additional script is not needed in the cases comparing two or three lists.  
 Note: this will not work to produce a Venn diagram on [mybinder.org](http://mybinder.org) because issues with `matplotlib` despite the fact the image is set to be saved as a file by default.
 
+**Usage**  
+
+'''
+usage:  find_overlap_in_lists.py [-h] [-s] [-n] Files [Files ...]
+find_overlap_in_lists.py takes any number of files of lists with items on
+separate lines and reports those items shared by all. It was originally
+intended to be used for lists of genes, but works on any lists. When comparing
+2, 3, or four lists to each other, a Venn diagram depicting the relationship
+of the lists will be made. Only the output for two or three lists will be an
+area-weighted diagram.**** Script by Wayne Decatur (fomightez @ github) ***
+positional arguments:
+  Files            List the names of FILES containing the lists to compare. AT
+                   LEAST ONE IS REQUIRED. Of course, it makes more sense with
+                   two or more.
+optional arguments:
+  -h, --help       show this help message and exit
+  -s, --sensitive  add this flag to force comparison of items to be case-
+                   sensitive (NOT recommended). Default (recommended) is to
+                   make the comparisons independent of character case in order
+                   make matching more robust, and not miss matches when case
+                   use is inconsistent among the lists.
+  -n, --nodiagram  add this flag to force not making any Venn diagram. (Or you
+                   could just use my script 'find_overlap_in_lists.py' that
+                   does the same without producing a diagram.)
+'''
+
 **example of input and output for `find_overlap_in_lists_with_Venn.py`:**
 
 **original input:**  
@@ -67,6 +93,26 @@ The default settings cause the comparisons to be case-insensitive with the cavea
 Matching independent of case is done by default to make the comparisons more robust. The optional flag `--sensitive` can be used to override that behavior and make the comparisons case-sensitive. For case-sensitive matching, the order of the files when the script is called makes no difference as only perfect matches for all input lists will be in the output file.
 Note, if using with yeast genes, probably best to use my script `geneID_list_to_systematic_names.py`, found in [my yeastmine-related code repository](https://github.com/fomightez/yeastmine) to convert all to yeast systematic names so that the lists are standardized before running `find_overlap_in_lists.py`.  
 A related script, `find_overlap_in_lists_with_Venn.py`, (see above) will do all this script will do plus when comparing 2, 3, or 4 lists it depict the relationships among the lists in a Venn diagram.
+
+**Usage**  
+
+'''
+usage:  find_overlap_in_lists.py [-h] [-s] Files [Files ...]
+find_overlap_in_lists.py takes any number of files of lists with items on
+separate lines and reports those items shared by all. It was originally
+intended to be used for lists of genes, but works on any lists. **** Script by
+Wayne Decatur (fomightez @ github) ***
+positional arguments:
+  Files            Names of files containing lists to compare. AT LEAST ONE
+                   REQUIRED.
+optional arguments:
+  -h, --help       show this help message and exit
+  -s, --sensitive  add this flag to force comparison of items to be case-
+                   sensitive (NOT recommended). Default (recommended) is to
+                   make the comparisons independent of character case in order
+                   make matching more robust, and not miss matches when case
+                   use is inconsistent among the lists.
+'''
 
 **example of input and output for `find_overlap_in_lists.py`:**
 
