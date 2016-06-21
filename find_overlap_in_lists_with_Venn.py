@@ -209,21 +209,42 @@ def knights_of_Venn_it(list_of_items_in_each_item_list, shared_items):
         from matplotlib_venn import venn2, venn2_circles
         # Subset sizes
         s = (
-            len(list_of_items_in_each_item_list[0]),  # Ab
-            len(list_of_items_in_each_item_list[1]),  # aB
-            len(shared_items),  # AB
+            len(list_of_items_in_each_item_list[0]) - len(shared_items),  # Ab (diagram at http://matthiaseisen.com/pp/patterns/p0144/ shows this as "A but not B" which equates to total in A with overlap with B substracted)
+            len(list_of_items_in_each_item_list[1]) - len(shared_items),  # aB (diagram at http://matthiaseisen.com/pp/patterns/p0144/ shows this as "B but not A" which equates to total in B with overlap with A substracted)
+            len(shared_items),  # AB (intersection, a.k.a. overlap shared between the two sets)
         )
 
-        v = venn2(subsets=s, set_labels=(list_files_to_analyze_list[0], list_files_to_analyze_list[1]))
+        v = venn2(subsets=s, set_labels=(
+            list_files_to_analyze_list[0] + " (" +str(len(list_of_items_in_each_item_list[0])) + " items)", list_files_to_analyze_list[1]  + " (" +str(len(list_of_items_in_each_item_list[1])) + " items)"))
 
         # Subset alphas and colors
-        v.get_patch_by_id('10').set_color('c')
-        v.get_patch_by_id('01').set_color('#993333')
-        v.get_patch_by_id('11').set_color('blue')
+        # Adding try..except combos for these because it turns out if group all a subset of sets some of the subsets won't exist and reference them like `01` and trying to do something throws an errr `AttributeError: 'NoneType'`
+        # but if don't exist no harm not changing the properties.
+        try:
+            v.get_patch_by_id('10').set_color('c')
+        except AttributeError:
+            pass
+        try:
+            v.get_patch_by_id('01').set_color('#993333')
+        except AttributeError:
+            pass
+        try:
+            v.get_patch_by_id('11').set_color('blue')
+        except AttributeError:
+            pass
 
-        v.get_patch_by_id('10').set_alpha(0.5)
-        v.get_patch_by_id('01').set_alpha(0.5)
-        v.get_patch_by_id('11').set_alpha(0.5)
+        try:
+            v.get_patch_by_id('10').set_alpha(0.5)
+        except AttributeError:
+            pass
+        try:
+            v.get_patch_by_id('01').set_alpha(0.5)
+        except AttributeError:
+            pass
+        try:
+            v.get_patch_by_id('11').set_alpha(0.5)
+        except AttributeError:
+            pass
 
         #plt.show()
         plt.savefig(name_of_image_file_to_save)
@@ -233,28 +254,82 @@ def knights_of_Venn_it(list_of_items_in_each_item_list, shared_items):
         # For case where three lists
         # see http://matthiaseisen.com/pp/patterns/p0145/
 
+        #breaking down subsets in easier way to represent and track
+        A_total = len(list_of_items_in_each_item_list[0])
+        A_overlap_with_B = len(set.intersection(
+            list_of_items_in_each_item_list[0],list_of_items_in_each_item_list[1]))
+        A_overlap_with_C = len(set.intersection(
+            list_of_items_in_each_item_list[0],list_of_items_in_each_item_list[2]))
+        B_total = len(list_of_items_in_each_item_list[1])
+        B_overlap_with_C = len(set.intersection(
+            list_of_items_in_each_item_list[1],list_of_items_in_each_item_list[2]))
+        C_total = len(list_of_items_in_each_item_list[2])
+        shared_by_all = len(shared_items)
+
+        A_but_not_B_or_C = (A_total - (
+            A_overlap_with_B + A_overlap_with_C) + shared_by_all)
+
+        B_but_not_A_or_C = (B_total - (
+            A_overlap_with_B + B_overlap_with_C) + shared_by_all)
+
+        A_n_B_but_not_C = (
+            A_overlap_with_B - shared_by_all)
+
+        C_but_not_A_or_B = (C_total - (
+            A_overlap_with_C + B_overlap_with_C) + shared_by_all)
+
+        A_n_C_but_not_B = (
+            A_overlap_with_C - shared_by_all)
+
+        B_n_C_but_not_A = (
+            B_overlap_with_C - shared_by_all)
+
+
+
         from matplotlib_venn import venn3, venn3_circles
         # Subset sizes
         s = (
-            len(list_of_items_in_each_item_list[0]),    # Abc
-            len(list_of_items_in_each_item_list[1]),    # aBc
-            len(set.intersection(list_of_items_in_each_item_list[0],list_of_items_in_each_item_list[1])),    # ABc
-            len(list_of_items_in_each_item_list[2]),    # abC
-            len(set.intersection(list_of_items_in_each_item_list[0],list_of_items_in_each_item_list[2])),    # AbC
-            len(set.intersection(list_of_items_in_each_item_list[1],list_of_items_in_each_item_list[2])),  # aBC
-            len(shared_items),    # ABC
+            A_but_not_B_or_C,    # Abc (diagram at http://matthiaseisen.com/pp/patterns/p0145/ looks to show this as "A but not B or C" which equates to total in A with overlap with both B & C subtracted & with overlap shared by all added back [since already subtracted once])
+            B_but_not_A_or_C ,    # aBc (diagram at http://matthiaseisen.com/pp/patterns/p0145/ looks to show this as "B but not A or C" which equates to total in B with overlap with both A & C subtracted & with overlap shared by all added back [since already subtracted once])
+            A_n_B_but_not_C,    # ABc
+            C_but_not_A_or_B,    # abC (label in diagram at http://matthiaseisen.com/pp/patterns/p0145/ wrong for this one; looks to show this as "C but not A or B"  which equates to total in C with overlap with both A & B subtracted & with overlap shared by all added back [since already subtracted once])
+            A_n_C_but_not_B ,    # AbC (label in diagram at http://matthiaseisen.com/pp/patterns/p0145/ wrong for this one; equates to everything shared by A and C that is not in B so it is overlap between A and C with number shared by all substracted)
+            B_n_C_but_not_A,  # aBC (label in diagram at http://matthiaseisen.com/pp/patterns/p0145/ wrong for this one;  equates to everything shared by B and C that is not in A so it is overlap between B and C with number shared by all substracted)
+            shared_by_all ,    # ABC (intersection, a.k.a. overlap shared between the three sets)
         )
 
-        v = venn3(subsets=s, set_labels=(list_files_to_analyze_list[0], list_files_to_analyze_list[1], list_files_to_analyze_list[2]))
+        v = venn3(subsets=s, set_labels=(
+            list_files_to_analyze_list[0] + " (" +str(len(list_of_items_in_each_item_list[0])) + " items)", list_files_to_analyze_list[1] + " (" +str(len(list_of_items_in_each_item_list[1])) + " items)", list_files_to_analyze_list[2] + " (" +str(len(list_of_items_in_each_item_list[2])) + " items)"))
 
         # Subset alphas and colors
-        v.get_patch_by_id('10').set_color('c')
-        v.get_patch_by_id('01').set_color('#993333')
-        v.get_patch_by_id('11').set_color('blue')
+        # Adding try..except combos for these because it turns out if group all a subset of sets some of the subsets won't exist and reference them like `010` and trying to do something throws an errr `AttributeError: 'NoneType'`
+        # but if don't exist no harm not changing the properties.
+        try:
+            v.get_patch_by_id('100').set_color('c')
+        except AttributeError:
+            pass
+        try:
+            v.get_patch_by_id('010').set_color('#993333')
+        except AttributeError:
+            pass
+        try:
+            v.get_patch_by_id('110').set_color('blue')
+        except AttributeError:
+            pass
 
-        v.get_patch_by_id('10').set_alpha(0.5)
-        v.get_patch_by_id('01').set_alpha(0.5)
-        v.get_patch_by_id('11').set_alpha(0.5)
+
+        try:
+            v.get_patch_by_id('101').set_alpha(0.5)
+        except AttributeError:
+            pass
+        try:
+            v.get_patch_by_id('011').set_alpha(0.5)
+        except AttributeError:
+            pass
+        try:
+            v.get_patch_by_id('111').set_alpha(0.5)
+        except AttributeError:
+            pass
 
         #plt.show()
         plt.savefig(name_of_image_file_to_save)
@@ -267,6 +342,10 @@ def knights_of_Venn_it(list_of_items_in_each_item_list, shared_items):
             list_files_to_analyze_list, filename=name_of_image_file_to_save, figsize=(12,12))
 
     sys.stderr.write( "\nImage of overlap of the lists saved as '{0}'.\n".format(name_of_image_file_to_save))
+
+
+
+
 
 ###--------------------------END OF HELPER FUNCTIONS---------------------------###
 ###--------------------------END OF HELPER FUNCTIONS---------------------------###
