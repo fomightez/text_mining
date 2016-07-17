@@ -376,7 +376,7 @@ parser.add_argument("Files", help="List the names of FILES containing the lists 
     to compare. AT LEAST ONE IS REQUIRED. Of course, it makes more sense with \
     two or more.", nargs="+")
 # see http://stackoverflow.com/questions/13219910/argparse-get-undefined-number-of-arguments
-# for hot last line allowd any number of files to be used.
+# for how last line allows any number of files to be used.
 parser.add_argument("-s", "--sensitive",help=
     "add this flag to force comparison of items to be case-sensitive (NOT \
     recommended). Default (recommended) is to make the comparisons independent \
