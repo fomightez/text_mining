@@ -14,7 +14,7 @@
 >  lists --> list of shared items and a diagram showing relationships between lists  
 Like `find_overlap_in_lists.py` (see below), except for in the cases of comparisons involving 2 or 3 list documents, it produces an area-weighted Venn diagram (image file) depicting the relationships of the items in the lists. 
 For comparing 4 lists, a Venn diagram will also be generated but it will not be area-wighted. To produce a Venn diagram for comparing lists found in four separate documents, it requires `venn4_from_github.py` (see below) in the same directory. This additional script is not needed in the cases comparing two or three lists.  
-Note: this will not work to produce a Venn diagram on [mybinder.org](http://mybinder.org) because of issues with `matplotlib` despite the fact the image is set to be saved as a file by default.  
+Note: The core of this script and related code presently will not work to produce a Venn diagram on [mybinder.org](http://mybinder.org) because of issues with `matplotlib_venn` and `plyplot` (reports `RuntimeError: Invalid DISPLAY variable`) despite the fact the image is set to be saved as a file by default.  
 See `find_overlap_in_lists.py` below for additional details.
 
 **Usage**  
