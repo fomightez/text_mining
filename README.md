@@ -197,4 +197,4 @@ Since data mining and text manipulations are at the heart of most of my computat
 
 - [My structure work repository](https://github.com/fomightez/structurework)
 
-- [My Yeast snoRNA Accounting repository](https://github.com/fomightez/yeast_snornas)
+- [My yeast snoRNA accounting repository](https://github.com/fomightez/yeast_snornas)
