@@ -112,12 +112,12 @@ def generate_output_file_name(file_name):
     main_part_of_name, file_extension = os.path.splitext(
         file_name) #from http://stackoverflow.com/questions/541390/extracting-extension-from-filename-in-python
     if len(list_files_to_analyze_list) == 2:
-        base_name_without_extension_second_file = os.path.splitext(
+        base_name_without_extension_for_second_file = os.path.splitext(
             os.path.basename(list_files_to_analyze_list[1]))[0]
         if '.' in file_name:  #I don't know if this is needed with the os.path.splitext method but I had it before so left it
-            return main_part_of_name + "_and_"+ base_name_without_extension_second_file +"_shared_items" + file_extension
+            return main_part_of_name + "_and_"+ base_name_without_extension_for_second_file +"_shared_items" + file_extension
         else:
-            return file_name + "_and_"+ base_name_without_extension_second_file +"_shared_items"
+            return file_name + "_and_"+ base_name_without_extension_for_second_file +"_shared_items"
     else:
         if '.' in file_name:  #I don't know if this is needed with the os.path.splitext method but I had it before so left it
             return main_part_of_name + "_and_"+ str(len(
@@ -128,7 +128,7 @@ def generate_output_file_name(file_name):
 
 def generate_output_file(provided_text):
     '''
-    function text and saves it as a text file
+    function takes text and saves it as a text file
     '''
     name_of_file_to_save = generate_output_file_name(list_files_to_analyze_list[0])
     data_file_stream = open(name_of_file_to_save , "w")
@@ -233,7 +233,7 @@ if case_sensitive:
 # Now determine items that occur in ALL the item lists, i.e., the overlap
 shared_items = set.intersection(*list_of_items_in_each_item_list) # see http://stackoverflow.com/questions/2541752/how-best-do-i-find-the-intersection-of-multiple-sets-in-python
 
-# if there was overlap identified handle the generating the output
+# if there was overlap identified handle generating the output
 if len(shared_items) > 0:
     # Before making output, if comparisons were case-insensitive (the default),
     # convert items all changed to uppercase for robustness of comparison back
@@ -249,7 +249,8 @@ if len(shared_items) > 0:
 
 
 
-    # Make the list easily made into an output file by separating each with a new line
+    # Make the list into text that can be easily made into an output file by
+    # separating each item with a new line
     text_to_save = list2text(shared_items)
 
 
