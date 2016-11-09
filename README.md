@@ -14,6 +14,7 @@
 >  lists --> list of shared items and a diagram showing relationships between lists  
 Like `find_overlap_in_lists.py` (see below), except for in the cases of comparisons involving 2 or 3 list documents, it produces an area-weighted Venn diagram (image file) depicting the relationships of the items in the lists. 
 For comparing 4 lists, a Venn diagram will also be generated but it will not be area-wighted. To produce a Venn diagram for comparing lists found in four separate documents, it requires `venn4_from_github.py` (see below) in the same directory. This additional script is not needed in the cases comparing two or three lists.  
+The output file produced will include `_shared_items` which can be used to easily track the newly created files, for example, after running the script you can run a move command to take advantage of this information to move the newly created files to a directory, such as `mkdir new_data; mv *_shared_items* new_data/`.  
 Note: The core of this script and related code can produce a Venn diagram on [mybinder.org](http://mybinder.org)-derived Binders if  `%matplotlib notebook` or `%matplotlib inline` is invoked as the first line, see [this demo](https://gist.github.com/fomightez/5575a91be88955257ba1f658ff253197).  
 See `find_overlap_in_lists.py` below for additional details.
 
@@ -105,6 +106,7 @@ A file listing the shared items (genes) will be produced.
 The default settings cause the comparisons to be case-insensitive with the caveat that the case of the shared items listed in the output file will be determined by whatever list is provided in the first position of the file name list when calling the script.  
 Matching independent of case is done by default to make the comparisons more robust. The optional flag `--sensitive` can be used to override that behavior and make the comparisons case-sensitive. For case-sensitive matching, the order of the files when the script is called makes no difference as only perfect matches for all input lists will be in the output file.
 Note, if using with yeast genes, probably best to use my script `geneID_list_to_systematic_names.py`, found in [my yeastmine-related code repository](https://github.com/fomightez/yeastmine) to convert all to yeast systematic names so that the lists are standardized before running `find_overlap_in_lists.py`.  
+The output file produced will include `_shared_items` which can be used to easily track the newly created files, for example, after running the script you can run a move command to take advantage of this information to move the newly created files to a directory, such as `mkdir new_data; mv *_shared_items* new_data/`.  
 A related script, `find_overlap_in_lists_with_Venn.py`, (see above) will do all this script will do plus when comparing 2, 3, or 4 lists it depicts the relationships among the lists in a Venn diagram.
 
 **Usage**  
