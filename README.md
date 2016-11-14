@@ -86,6 +86,7 @@ YIL007C                     YDL013W
     python find_overlap_in_lists_with_Venn.py list1.txt list2.txt list3.txt   
 
 **output after run:**  
+
 (text in a file, called `list1_and_2others_shared_items.txt` , with the contents below)
 ```
 YDR190C
@@ -94,6 +95,16 @@ SVLVASGYRHNITSVSQ
 
 
 ```
+text shown on the command line (specifically, stderr):
+```
+Overlap identified! Shared items list saved as 'list1_and_2others_shared_items.txt'.
+The overlap represents 30.00% of the list 'list1.txt'.
+The overlap represents 15.00% of the list 'list2.txt'.
+The overlap represents 37.50% of the list 'list3.txt'.
+
+Image of overlap of the lists saved as 'list1_and_2others_overlap_representation.png'.
+```
+
 (image file called `list1_and_2others_overlap_representation.png`)  
 ![diagram example](list1_and_2others_overlap_representation.png)
 
@@ -168,6 +179,15 @@ YDR190C
 YPL235W
 SVLVASGYRHNITSVSQ
 
+
+```
+
+text shown on the command line (specifically, stderr):
+```
+Overlap identified! Shared items list saved as 'list1_and_2others_shared_items.txt'.
+The overlap represents 30.00% of the list 'list1.txt'.
+The overlap represents 15.00% of the list 'list2.txt'.
+The overlap represents 37.50% of the list 'list3.txt'.
 
 ```
 
