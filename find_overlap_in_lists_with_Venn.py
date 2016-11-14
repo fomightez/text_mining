@@ -39,9 +39,6 @@
 # Dependencies beyond the mostly standard libraries/modules:
 # If comparing four lists it will need the additional script `venn4_from_github.py`
 # and pylab
-# In fact it will not work to produce a Venn diagram when run on mybinder.org
-# because of issues with `matplotlib` despite the fact the image is set to be
-# saved as a file by default.
 #
 #
 #
@@ -133,12 +130,12 @@ def generate_output_file_name(file_name):
     main_part_of_name, file_extension = os.path.splitext(
         file_name) #from http://stackoverflow.com/questions/541390/extracting-extension-from-filename-in-python
     if len(list_files_to_analyze_list) == 2:
-        base_name_without_extension_second_file = os.path.splitext(
+        base_name_without_extension_for_second_file = os.path.splitext(
             os.path.basename(list_files_to_analyze_list[1]))[0]
         if '.' in file_name:  #I don't know if this is needed with the os.path.splitext method but I had it before so left it
-            return main_part_of_name + "_and_"+ base_name_without_extension_second_file +"_shared_items" + file_extension
+            return main_part_of_name + "_and_"+ base_name_without_extension_for_second_file +"_shared_items" + file_extension
         else:
-            return file_name + "_and_"+ base_name_without_extension_second_file +"_shared_items"
+            return file_name + "_and_"+ base_name_without_extension_for_second_file +"_shared_items"
     else:
         if '.' in file_name:  #I don't know if this is needed with the os.path.splitext method but I had it before so left it
             return main_part_of_name + "_and_"+ str(len(
@@ -149,7 +146,7 @@ def generate_output_file_name(file_name):
 
 def generate_output_file(provided_text):
     '''
-    function text and saves it as a text file
+    function takes text and saves it as a text file
     '''
     name_of_file_to_save = generate_output_file_name(list_files_to_analyze_list[0])
     data_file_stream = open(name_of_file_to_save , "w")
@@ -438,6 +435,11 @@ for each_item_list_file in list_files_to_analyze_list:
     # to `set` insures the list only includes unique items and set is that gets
     # used in the main function.
 
+    # Monitor state of redundancy in lists to allow later use in formatting
+    # feedback about percent overlap represents for each list.
+    redundancy_noted = True if len(set(
+        file_items_list)) < len(file_items_list) else False
+
 # Warn about case issue. (But not in a loop.)
 if case_sensitive:
     sys.stderr.write( "\n***NOTICE***. Be aware using `--sensitive` option may result in missing matches if case use inconsistent in lists. ***NOTICE**\n")
@@ -445,7 +447,7 @@ if case_sensitive:
 # Now determine items that occur in ALL the item lists, i.e., the overlap
 shared_items = set.intersection(*list_of_items_in_each_item_list) # see http://stackoverflow.com/questions/2541752/how-best-do-i-find-the-intersection-of-multiple-sets-in-python
 
-# if there was overlap identified handle the generating the output
+# if there was overlap identified handle generating the output
 if len(shared_items) > 0:
     # Before making output, if comparisons were case-insensitive (the default),
     # convert items all changed to uppercase for robustness of comparison back
@@ -461,12 +463,25 @@ if len(shared_items) > 0:
 
 
 
-    # Make the list easily made into an output file by separating each with a new line
+    # Make the list into text that can be easily made into an output file by
+    # separating each item with a new line
     text_to_save = list2text(shared_items)
 
 
     # Save results
     generate_output_file(text_to_save)
+
+    # give user feedback on percentage of each list the overlap represents
+    for index, item_list in enumerate(list_of_items_in_each_item_list):
+        info_on_percent_overlap = (
+            "The overlap represents {0:.2%} of the list '{1}'".format(
+                len(shared_items)/float(len(item_list)),
+                list_files_to_analyze_list[index]))
+        if redundancy_noted:
+            sys.stderr.write(
+                info_on_percent_overlap + ", disregarding redundancy in the list.\n")
+        else:
+            sys.stderr.write(info_on_percent_overlap + ".\n")
 
     # Make an accompanying diagram depicting the relationships between the lists,
     # if 2, 3, or 4 lists.
