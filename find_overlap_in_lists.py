@@ -226,6 +226,16 @@ for each_item_list_file in list_files_to_analyze_list:
     # to `set` insures the list only includes unique items and set is that gets
     # used in the main function.
 
+    # Monitor state of redundancy in lists to allow later use in formatting
+    # feedback about percent overlap represents for each list.
+    redundancy_noted = True if len(set(
+        file_items_list)) < len(file_items_list) else False
+
+
+
+
+
+
 # Warn about case issue. (But not in a loop.)
 if case_sensitive:
     sys.stderr.write( "\n***NOTICE***. Be aware using `--senstiive` option may result in missing matches if case use inconsistent in lists. ***NOTICE***\n")
@@ -258,6 +268,18 @@ if len(shared_items) > 0:
 
     # Save results
     generate_output_file(text_to_save)
+
+    # give user feedback on percentage of each list the overlap represents
+    for index, item_list in enumerate(list_of_items_in_each_item_list):
+        info_on_percent_overlap = (
+            "The overlap represents {0:.2%} of the list '{1}'".format(
+                len(shared_items)/float(len(item_list)),
+                list_files_to_analyze_list[index]))
+        if redundancy_noted:
+            sys.stderr.write(
+                info_on_percent_overlap + ", disregarding redundancy in the list.\n")
+        else:
+            sys.stderr.write(info_on_percent_overlap + ".\n")
 
 else:
     sys.stderr.write( "\nNo overlap identified. Check your lists.\n")
