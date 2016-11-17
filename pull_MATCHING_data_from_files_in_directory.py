@@ -1,6 +1,6 @@
 #! /usr/bin/env python
 
-# pull_matching_data_from_files_in_directory by Wayne Decatur
+# pull_MATCHING_data_from_files_in_directory.py by Wayne Decatur
 # ver 0.1
 #
 #
@@ -8,9 +8,7 @@
 #*************************************************************************
 # USES Python 2.7
 #
-# DEPENDENCIES:
-# typical modules like argparse, os
-#
+
 # Purpose: extracts lines with matching text in them from files in a folder.
 # It outputs the matching lines to a single file.
 # In regards to the text to match on each line, it is oblivious to case.
@@ -22,6 +20,11 @@ REFASHIONED CODE FROM `merge_multi_PDBs_into_single_file.py` to make.
 Then I decided to try and generalize it to allow setting the text in file names
 and text to search in lines of text as user specified fields in the code.
 '''
+#
+#
+# DEPENDENCIES:
+# typical modules like argparse, os
+#
 #
 #
 # v.0.1. - basics done
