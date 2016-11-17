@@ -20,17 +20,17 @@ Did this by making a script that went through every file in the `GSE69472_RAW` f
 Ran the script in the directory above the  `GSE69472_RAW` folder and pointed it at that folder with an argument when called the script.
 REFASHIONED CODE FROM `merge_multi_PDBs_into_single_file.py` to make.
 Then I decided to try and generalize it to allow setting the text in file names
-and text to search in lines of text as user specified fileds in the code.
+and text to search in lines of text as user specified fields in the code.
 '''
 #
 #
-# v.0.1.
-# basics done
+# v.0.1. - basics done
 #
 # To do:
-# make so that is general. (close to done)
-# make so you can provide at least the text in the line to look for as an
+# Make so that is general. (nearly done)
+# Make so you can provide at least the text in the line to look for as an
 # argument when you call the program?
+# Other ideas to possibly do:
 # Make so you can specify regular expression in name_pattern_for_files_to_mine.
 # Make so you can use regular expression to specify text_of_interest.
 # May be easier to initially accomplish those last two by making a new version
@@ -164,7 +164,7 @@ list_of_filepaths_for_data_files = []
 
 
 # If provided argument is a DIRECTORY loop through collecting information on
-# each PDB file.
+# each file matching the name pattern.
 #from http://stackoverflow.com/questions/3204782/how-to-check-if-a-file-is-a-directory-or-regular-file-in-python
 if os.path.isfile(args.Directory):
     sys.stderr.write("\n***ERROR ********************ERROR ***************** \n")
@@ -184,6 +184,6 @@ elif os.path.isdir(args.Directory):
 
 
 
-#Now that the name and path info on each pertient data file has been collected,
+# Now that the name and path info on each pertient data file has been collected,
 # extract the data from each and make a file
 extract_data(list_of_filepaths_for_data_files, name_of_file_to_generate)
