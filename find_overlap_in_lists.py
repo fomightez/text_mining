@@ -11,7 +11,7 @@
 # work for any type of list. The default settings cause the comparisons to be
 # case-insensitive with the caveat that the case of the shared items will be
 # set by whatever list is provided in the first position when calling the script.
-# Matching  independent of case is done to make the comparisons more robust.
+# Matching is by default independent of case to make the comparisons more robust.
 # The optional flag `--sensitive` can be used to override that behavior and make
 # the comparisons case-sensitive.
 #
@@ -162,7 +162,7 @@ def list2text(a_list):
 
 #*******************************************************************************
 ###-----------------for parsing command line arguments-----------------------###
-parser = argparse.ArgumentParser(prog=' find_overlap_in_lists.py',description=" find_overlap_in_lists.py \
+parser = argparse.ArgumentParser(prog='find_overlap_in_lists.py',description="find_overlap_in_lists.py \
     takes any number of files of lists with items on separate lines and reports \
     those items shared by all. It was originally intended to be used for lists \
     of genes, but works on any lists. **** Script by Wayne Decatur   \
@@ -226,10 +226,14 @@ for each_item_list_file in list_files_to_analyze_list:
     # to `set` insures the list only includes unique items and set is that gets
     # used in the main function.
 
+    #print len(file_items_list) # for verifying works/debugging
+    #print len(set(file_items_list)) # for verifying works/debugging
+
     # Monitor state of redundancy in lists to allow later use in formatting
     # feedback about percent overlap represents for each list.
     redundancy_noted = True if len(set(
         file_items_list)) < len(file_items_list) else False
+    #print redundancy_noted # for verifying works/debugging
 
 
 
@@ -238,7 +242,7 @@ for each_item_list_file in list_files_to_analyze_list:
 
 # Warn about case issue. (But not in a loop.)
 if case_sensitive:
-    sys.stderr.write( "\n***NOTICE***. Be aware using `--senstiive` option may result in missing matches if case use inconsistent in lists. ***NOTICE***\n")
+    sys.stderr.write( "\n***NOTICE***. Be aware using `--senstive` option may result in missing matches if case use inconsistent in lists. ***NOTICE***\n")
 
 # Now determine items that occur in ALL the item lists, i.e., the overlap
 shared_items = set.intersection(*list_of_items_in_each_item_list) # see http://stackoverflow.com/questions/2541752/how-best-do-i-find-the-intersection-of-multiple-sets-in-python
