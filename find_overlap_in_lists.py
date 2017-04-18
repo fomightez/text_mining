@@ -242,7 +242,7 @@ for each_item_list_file in list_files_to_analyze_list:
 
 # Warn about case issue. (But not in a loop.)
 if case_sensitive:
-    sys.stderr.write( "\n***NOTICE***. Be aware using `--senstive` option may result in missing matches if case use inconsistent in lists. ***NOTICE***\n")
+    sys.stderr.write( "\n***NOTICE***. Be aware using `--sensitive` option may result in missing matches if case use inconsistent in lists. ***NOTICE***\n")
 
 # Now determine items that occur in ALL the item lists, i.e., the overlap
 shared_items = set.intersection(*list_of_items_in_each_item_list) # see http://stackoverflow.com/questions/2541752/how-best-do-i-find-the-intersection-of-multiple-sets-in-python
