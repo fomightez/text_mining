@@ -48,7 +48,7 @@ optional arguments:
                    does the same without producing a diagram.)
 ```
 
-**example of input and output for `find_overlap_in_lists_with_Venn.py`:**
+**EXAMPLE OF INPUT AND OUTOUT  for `find_overlap_in_lists_with_Venn.py`:**
 
 **original input:**  
 (text in three files with each column below representing contents of a file)
@@ -145,7 +145,7 @@ optional arguments:
                    use is inconsistent among the lists.
 ```
 
-**example of input and output for `find_overlap_in_lists.py`:**
+**EXAMPLE OF INPUT AND OUTOUT  for `find_overlap_in_lists.py`:**
 
 **original input:**  
 (text in three files with each column below representing contents of a file)
@@ -204,6 +204,7 @@ In the file that provides the word/name list, the list can be in almost any form
 !"#$%&'()*+,-./:;<=>?@[\]^_``{|}~    
 Matching is by default independent of case to make the comparisons more robust. The optional flag `--sensitive` can be used to override that behavior and make
 the comparisons case-sensitive.  
+On the data side, you can specify that the words to match against only need to match a substring in the data lines in order to be kept by using the optional flag `--data_substring_suffices`. As an example, imagine the word list only contains the word "me". In the case of `--data_substring_suffices` a line with the word "some" on it will match and be kept. Whereas without the `--data_substring_suffices` flag, i.e., the default situation, only if the word "me" is on a line will the line be kept. This is useful for gene data because with it you can specify several genes. If you have "snR" as a word in your word list, you'd still get matches to lines containing "snR17" as well as lines containing "snR191".  
 The easiest way to run the script is to provide both the list of words or names file and the "data file" in the same directory with the script. However, if you are familiar with designating paths on the command line, thay can be used when invoking the script and pointing it at the files. The script will save the file in the same directory as the provided data file.  
 The easiest way to create a list_file using a YeastMine multi-column list is to paste it in a spreadsheet and extract the gene names column to a new file that you save as text. You'll want to use the `--lines` flag if working with tRNA genes like `tP(UGG)A` or any other identifier with punctuation. 
 
@@ -226,10 +227,16 @@ positional arguments:
                    REQUIRED.
 optional arguments:
   -h, --help       show this help message and exit
-  -l, --lines      add this flag to force individual lines to be used to read
-                   the words_list and make the list to be compared to lines in
-                   the data file. This enables the use of two-word names, like
-                   `Mr. Smith` or even phrases
+  -l, --lines      add this flag to force individual lines to be used to  
+                   read the words_list and make the list to be compared  
+                   to lines in the data file. This enables the use of  
+                   two-word names with punctutation, like `Mr. Smith`, or  
+                   even phrases.  
+  -d, --data_substring_suffices  
+                   add this flag to allow substrings from the data lines  
+                   to match contents of the words_list. For example, when  
+                   this flag is active `me` in the words_list would allow  
+                   for matches to lines containing the word `some`.  
   -s, --sensitive  add this flag to force comparison of items to be case-
                    sensitive (NOT recommended). Default (recommended) is to
                    make the comparisons independent of character case in order
@@ -237,7 +244,7 @@ optional arguments:
                    use is inconsistent among the sources.
 ```
 
-**example of input and output for `extract_data_on_line_using_word_list.py`:**
+**EXAMPLE OF INPUT AND OUTOUT  for `extract_data_on_line_using_word_list.py`:**
 
 **original input for list_file:**  
 (text in three files with each column below representing contents of a file)
@@ -246,14 +253,14 @@ YDR190C
 YPL235W  
 YLR366c 
 urgOu  
-SVLVASGYRHNITSVSQ
+SVLVASGYRHNITSVSQCCTISSLRKVKVQLHCGGDRREELEIFTARACQCDMCRLSRY
 ```
 
 **original input for data_file:**  
 (text in three files with each column below representing contents of a file)
 ```
 YPR366C 87  7.91
-YDR190C 99  6.54
+YDr190C 99  6.54
 YPL235W 78  32.21
 YLR466C 17  7.91
 urgou 54  9.87
@@ -282,7 +289,8 @@ YML100W 91  8.62
 **output after run:**  
 (text in a file, called `data_file_extracted.txt` , with the contents below)
 ```
-YDR190C 99  6.54
+YPR366C 87  7.91
+YDr190C 99  6.54
 YPL235W 78  32.21
 urgou 54  9.87
 SVLVASGYRHNITSVSQCCTISSLRKVKVQLHCGGDRREELEIFTARACQCDMCRLSRY 83 45.55
@@ -292,7 +300,7 @@ SVLVASGYRHNITSVSQCCTISSLRKVKVQLHCGGDRREELEIFTARACQCDMCRLSRY 83 45.55
 
 **text shown on the command line (specifically, stderr):**
 ```
-Extracted Lines saved as 'data_file_extracted.txt'.
+Extracted lines (5 total) saved as 'data_file_extracted.txt'.
 
 ```
 
@@ -306,7 +314,7 @@ In the file that provides the word/name list, the list can be in almost any form
 Some attempt is made to even allow words like "don't" but it might not work for all cases such as the possesive forms of words ending in 's', like "Wiggins'.  Punctuation here refers to any instances of these characters: 
 !"#$%&'()*+,-./:;<=>?@[\]^_`{|}~  
 Matching is by default independent of case to make the comparisons more robust. The optional flag `--sensitive` can be used to override that behavior and make the comparisons case-sensitive.  
-On the data side, you can specify that the words to match against only need to match a substring in the data lines in order to be removed by using the optional flag `--data_substring_suffices`. As an example, imagine the word list only contains the word "me". In the case of `--data_substring_suffices` a line with the word "some" on it will match and be removed. Whereas without the `--data_substring_suffices` flag, i.e., the defautl situation, only if the word "me" is on a line will the line be removed This is useful for gene data because with it you can specify several genes. If you have "snR" as a word in your word list, you'd still get matches to lines containing "snR17" as well as lines containing "snR191".  
+On the data side, you can specify that the words to match against only need to match a substring in the data lines in order to be removed by using the optional flag `--data_substring_suffices`. As an example, imagine the word list only contains the word "me". In the case of `--data_substring_suffices` a line with the word "some" on it will match and be removed. Whereas without the `--data_substring_suffices` flag, i.e., the default situation, only if the word "me" is on a line will the line be removed This is useful for gene data because with it you can specify several genes. If you have "snR" as a word in your word list, you'd still get matches to lines containing "snR17" as well as lines containing "snR191".  
 The easiest way to run the script is to provide both the list of words or names file and the "data file" in the same directory with the script. However,if you are familiar with designating paths on the command line, thay can be used when invoking the script and pointing it at the files. The script will save the file in the same directory as the provided data file. 
 The easiest way to create a list_file using a YeastMine multi-column list is to paste it in a spreadsheet and extract the gene names column to a new file that you save as text.  You'll want to use the `--lines` flag if working with tRNA genes like `tP(UGG)A` or any other identifier with punctuation.
 
@@ -333,12 +341,12 @@ optional arguments:
   -l, --lines      add this flag to force individual lines to be used to read
                    the words_list and make the list to be compared to lines in
                    the data file. This enables the use of two-word names with
-                   punctutation, like `Mr. Smith`, or even phrases.  
+                   punctuation, like `Mr. Smith`, or even phrases.  
   -d, --data_substring_suffices  
-                        add this flag to allow substrings from the data lines
-                        to match contents of the words_list. For example, when
-                        this flag is active `me` in the words_list would allow
-                        for matches to lines containing the word `some`.
+                   add this flag to allow substrings from the data lines
+                   to match contents of the words_list. For example, when
+                   this flag is active `me` in the words_list would allow
+                   for matches to lines containing the word `some`.
   -s, --sensitive  add this flag to force comparison of items to be case-
                    sensitive (NOT recommended). Default (recommended) is to
                    make the comparisons independent of character case in order
@@ -346,7 +354,7 @@ optional arguments:
                    use is inconsistent among the sources.
 ```
 
-**example of input and output for `subtract_data_on_line_using_word_list.py` with `--data_substring_suffices` flag used:**
+**EXAMPLE OF INPUT AND OUTOUT for `subtract_data_on_line_using_word_list.py` with `--data_substring_suffices` flag used:**
 
 **original input for list_file:**  
 (text in three files with each column below representing contents of a file)
