@@ -32,7 +32,7 @@
 # flag `--data_substring_suffices`. As an example, imagine the word list only
 # contains the word "me". In the case of `--data_substring_suffices` a line 
 # with the word "some" on it will match and be removed. Whereas without the 
-# `--data_substring_suffices` flag, i.e., the defautl situation, only if the
+# `--data_substring_suffices` flag, i.e., the default situation, only if the
 # word "me" is on a line will the line be removed This is useful for gene data 
 # because with it you can specify several genes. If you have "snR" as a word 
 # in your word list, you'd still get matches to lines containing "snR17" as well
