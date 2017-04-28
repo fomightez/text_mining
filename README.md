@@ -389,7 +389,7 @@ YDL206W 27  7.39
 
 
 ```
-Note that `SVLVASGYRHNITSVSQCCTISSLRKVKVQLHCGGDRREELEIFTARACQCDMCRLSRY 83 45.55` would have remained if ran without `--data_substring_suffices` as it would need word in word list to match entire word.
+Note that `SVLVASGYRHNITSVSQCCTISSLRKVKVQLHCGGDRREELEIFTARACQCDMCRLSRY 83 45.55` would have remained if `--data_substring_suffices` flag had not been included in the example command. The default is to need the word in word list to match entire word.
 
 **text shown on the command line (specifically, stderr):**
 ```
