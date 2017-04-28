@@ -193,7 +193,7 @@ parser.add_argument("data_file", help="Name of file containing lines to scan \
 parser.add_argument("-l", "--lines",help=
     "add this flag to force individual lines to be used to read the words_list \
     and make the list to be compared to lines in the data file. This enables \
-    the use of two-word names with punctutation, like `Mr. Smith`, or even phrases.",
+    the use of two-word names with punctuation, like `Mr. Smith`, or even phrases.",
     action="store_true")
 parser.add_argument("-d", "--data_substring_suffices",help=
     "add this flag to allow substrings from the data lines to match contents\
