@@ -14,18 +14,29 @@
 # then to keep lines in the "data file" that contain those words.
 # 
 # In the file that provides the word/name list, the list can be in almost any
-# form, for example each word or name on a separate line or simplu seperated by 
+# form, for example each word or name on a separate line or simply separated by 
 # a comma or orther punctuation or a mixture. By default spaces will be taken 
 # as the separation of words/names. If you'd like to specify that individual
 # lines are the basic unit so that you can use more complex names or identifiers 
 # like "Mr. Smith", simply add the command line option `--lines`.
 # Some attempt is made to even allow words like "don't" but it might not work
 # for all cases such as the possesive forms of words ending in 's', 
-# like "Wiggins'". Punctuation here refers to any instances of any of next line:
+# like "Wiggins'". Punctuation here refers to any instances of these characters:
 # !"#$%&'()*+,-./:;<=>?@[\]^_`{|}~
 # Matching is by default independent of case to make the comparisons more robust.
 # The optional flag `--sensitive` can be used to override that behavior and make
 # the comparisons case-sensitive.
+#
+# On the data side, you can specify that the words to match against only need to
+# match a substring in the data lines in order to be kept by using the optional
+# flag `--data_substring_suffices`. As an example, imagine the word list only
+# contains the word "me". In the case of `--data_substring_suffices` a line 
+# with the word "some" on it will match and be kept. Whereas without the 
+# `--data_substring_suffices` flag, i.e., the default situation, only if the
+# word "me" is on a line will the line be kept. This is useful for gene data 
+# because with it you can specify several genes. If you have "snR" as a word 
+# in your word list, you'd still get matches to lines containing "snR17" as well
+# as lines containing "snR191".
 #
 # The easiest way to run the script is to provide both the list of words or 
 # names file and the "data file" in the same directory with the script. However,
@@ -139,7 +150,7 @@ def generate_output_file(provided_text):
     data_file_stream.write(provided_text.rstrip('\r\n')) #rstrip to remove trailing newline
     # from http://stackoverflow.com/questions/275018/how-can-i-remove-chomp-a-newline-in-python
     data_file_stream.close()
-    sys.stderr.write( "\nExtracted lines saved as '{0}'.\n".format(name_of_file_to_save))
+    sys.stderr.write( "\nExtracted lines ({0} total) saved as '{1}'.\n".format(len(provided_text.rstrip('\r\n').split('\n')), name_of_file_to_save))
 
 def list2text(a_list):
     '''
@@ -181,7 +192,12 @@ parser.add_argument("data_file", help="Name of file containing lines to scan \
 parser.add_argument("-l", "--lines",help=
     "add this flag to force individual lines to be used to read the words_list \
     and make the list to be compared to lines in the data file. This enables \
-    the use of two-word names with punctutation, like `Mr. Smith`, or even phrases.",
+    the use of two-word names with punctuation, like `Mr. Smith`, or even phrases.",
+    action="store_true")
+parser.add_argument("-d", "--data_substring_suffices",help=
+    "add this flag to allow substrings from the data lines to match contents\
+    of the words_list. For example, when this flag is active `me` in the\
+    words_list would allow for matches to lines containing the word `some`.",
     action="store_true")
 parser.add_argument("-s", "--sensitive",help=
     "add this flag to force comparison of items to be case-sensitive (NOT \
@@ -198,6 +214,7 @@ list_file = args.list_file
 data_file = args.data_file
 use_lines = args.lines
 case_sensitive = args.sensitive
+data_substring_suffices = args.data_substring_suffices
 
 
 
@@ -231,13 +248,23 @@ for line in data_file:
     # work with later, hence the use of `.strip()`
     # Handle differently if `case_sensitive` option activated
     if case_sensitive:
-        if any(word in line for word in list_of_words):
-            lines_kept_list.append(line)
-        # based on Lauritz V. Thaulow's answer at http://stackoverflow.com/questions/6531482/how-to-check-if-a-string-contains-an-element-from-a-list-in-python
+        if data_substring_suffices:
+            if any(word in line for word in list_of_words):
+                lines_kept_list.append(line)
+                # based on Lauritz V. Thaulow's answer at http://stackoverflow.com/questions/6531482/how-to-check-if-a-string-contains-an-element-from-a-list-in-python
+        else:
+            if any(word in line.split() for word in list_of_words):
+                lines_kept_list.append(line)
+                # based on Lauritz V. Thaulow's answer at http://stackoverflow.com/questions/6531482/how-to-check-if-a-string-contains-an-element-from-a-list-in-python
     else:
-        if any(word.lower() in line.lower() for word in list_of_words):
-            lines_kept_list.append(line)
-        # expanded from Lauritz V. Thaulow's answer at http://stackoverflow.com/questions/6531482/how-to-check-if-a-string-contains-an-element-from-a-list-in-python
+        if data_substring_suffices:
+            if any(word.lower() in line.lower() for word in list_of_words):
+                lines_kept_list.append(line)
+            # expanded from Lauritz V. Thaulow's answer at http://stackoverflow.com/questions/6531482/how-to-check-if-a-string-contains-an-element-from-a-list-in-python
+        else:
+            if any(word.lower() in line.lower().split() for word in list_of_words):
+                lines_kept_list.append(line)
+
 
  
 # Save results and give feedback
