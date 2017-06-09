@@ -437,4 +437,4 @@ Since data mining and text manipulations are at the heart of most of my computat
 
 - [My yeast snoRNA accounting repository](https://github.com/fomightez/yeast_snornas)
 
-Additionally, several of [my mini-pipeline scripts](https://github.com/fomightez/mini-pipelines) involve scripts described on this page.
+Additionally, several of [my mini-pipeline scripts](https://github.com/fomightez/mini-pipelines) involve scripts that fall under this category.
