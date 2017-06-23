@@ -37,6 +37,7 @@
 #
 #
 # Dependencies beyond the mostly standard libraries/modules:
+# matplotlib_venn
 # If comparing four lists it will need the additional script `venn4_from_github.py`
 # and pylab
 #
