@@ -438,3 +438,11 @@ Since data mining and text manipulations are at the heart of most of my computat
 - [My yeast snoRNA accounting repository](https://github.com/fomightez/yeast_snornas)
 
 Additionally, several of [my mini-pipeline scripts](https://github.com/fomightez/mini-pipelines) involve scripts that fall under this category.
+
+
+Related scripts by others
+-------------------------
+
+Handy, related utilities authored by others:
+
+- [CSVtoTable](https://github.com/vividvilla/csvtotable) - Simple, Python-based command-line utility to convert CSV files to searchable and sortable HTML table. (Note that it looks like editing the function `convert` [here](https://github.com/vividvilla/csvtotable/blob/master/csvtotable/convert.py) it could be made to handle TSV files.
