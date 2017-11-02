@@ -8,7 +8,6 @@
 **Description of each script**
 
 
-
 - `find_overlap_in_lists_with_Venn.py`
 
 >  lists --> list of shared items and a diagram showing relationships between lists  
@@ -422,6 +421,12 @@ Thought it is currently configured to only focus on a directory of files, you ca
 
 > slightly modified from the original by Kristoffer Sahlin [here](https://github.com/ksahlin/pyinfor/blob/master/venn.py) to be used with `find_overlap_in_lists_with_Venn.py`  
 
+
+
+- `csv_data_to_list.py`
+
+> files with comma-separated values --> specified data from each file printed to stdout as a Python list  
+Presently a user-unfriendly utility script that needs the list of files hard-coded. Features a useful function `csv_to_dict` function takes a csv file and returns a dictionary wherec olumn headings (first line of th csv file) are mapped to a list of values for that column. The keys come from the first line of the csv file. Columns designated for the lists are alse set as hard-coded values in the script at this time. 
 
 
 Related scripts
