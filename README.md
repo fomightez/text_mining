@@ -445,6 +445,11 @@ Since data mining and text manipulations are at the heart of most of my computat
 Additionally, several of [my mini-pipeline scripts](https://github.com/fomightez/mini-pipelines) involve scripts that fall under this category.
 
 
+Related Gists
+-------------
+
+[Text list ===> Python-code list object](http://roughdraft.io/e6695e3ee16430ef228e1d7c4cb761c1)
+
 Related scripts by others
 -------------------------
 
