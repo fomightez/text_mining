@@ -432,7 +432,9 @@ Presently a user-unfriendly utility script that needs the list of files hard-cod
 Related scripts
 ---------------
 
-Since data mining and text manipulations are at the heart of most of my computational endeavors, several other of my code repositories hold code related to text mining/text manipulation. Here are some:
+Several (most?) of [my mini-pipeline scripts](https://github.com/fomightez/mini-pipelines) involve scripts that fall under this category.
+
+Since data mining and text manipulations are at the heart of many of my computational endeavors, several other of my code repositories hold code related to text mining/text manipulation. Here are some:
 
 - [My YeastMine code repository](https://github.com/fomightez/yeastmine) 
 
@@ -442,7 +444,7 @@ Since data mining and text manipulations are at the heart of most of my computat
 
 - [My yeast snoRNA accounting repository](https://github.com/fomightez/yeast_snornas)
 
-Additionally, several of [my mini-pipeline scripts](https://github.com/fomightez/mini-pipelines) involve scripts that fall under this category.
+
 
 
 Related Gists
