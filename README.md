@@ -439,6 +439,7 @@ Since data mining and text manipulations are at the heart of many of my computat
 - [My YeastMine code repository](https://github.com/fomightez/yeastmine) 
 
 - [My sequence work repository](https://github.com/fomightez/sequencework)
+  * In particular, my `tx2gene_generator.py` under `Adjust Lists` collection, in general takes a list of items in first column of a text list in a designated file, skipping header line, and rerranges it to output. All in a concise and easily adapted form.
 
 - [My structure work repository](https://github.com/fomightez/structurework)
 
