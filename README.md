@@ -438,8 +438,11 @@ Since data mining and text manipulations are at the heart of many of my computat
 
 - [My YeastMine code repository](https://github.com/fomightez/yeastmine) 
 
+  * In particular, `compare_results_systematic_to_std.py` under "Evaluation" sub-folder [here](https://github.com/fomightez/yeastmine/tree/master/evaluation) is to highlight differences between a list. (Despite name, I think it is rather generally applicable. Or did I rezlize `diff` and , and for just a handful of total files, Text Wrangler good enough and didn't bother generalizing?)
+  * many others in that repo
+
 - [My sequence work repository](https://github.com/fomightez/sequencework)
-  * In particular, my `tx2gene_generator.py` under `Adjust Lists` collection, in general takes a list of items in first column of a text list in a designated file, skipping header line, and rerranges it to output. All in a concise and easily adapted form.
+  * In particular, `tx2gene_generator.py` under `Adjust Lists` collection, in general takes a list of items in first column of a text list in a designated file, skipping header line, and rerranges it to output. All in a concise and easily adapted form.
 
 - [My structure work repository](https://github.com/fomightez/structurework)
 
