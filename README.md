@@ -317,6 +317,8 @@ On the data side, you can specify that the words to match against only need to m
 The easiest way to run the script is to provide both the list of words or names file and the "data file" in the same directory with the script. However,if you are familiar with designating paths on the command line, thay can be used when invoking the script and pointing it at the files. The script will save the file in the same directory as the provided data file. 
 The easiest way to create a list_file using a YeastMine multi-column list is to paste it in a spreadsheet and extract the gene names column to a new file that you save as text.  You'll want to use the `--lines` flag if working with tRNA genes like `tP(UGG)A` or any other identifier with punctuation.
 
+Use this script if you are seeking the difference between two lists that are in file form, i.e., those line/items that occur in one file, but not the other **without regard to specific line number**; use as the 'data file' the file to remove lines from to produce the output and use as the 'word list' file the other file, which may have related line/items but that will simply be used for comparison to determine what to remove from the 'data file' and remain untouched. Another way to look at it, if you had list A and list B, using the script this way with list A as the data file will give you what is unique to list A relative list B, and is thus one part of the inverse operation of the script that identifies overlap; you could concatenate the results of doing that operation in both directions on two files to get the actual inverse of the overlap script, i.e., all items that don't overlap in both lists. As you are more likely to want to know what list specifically is missing something, I don't have a script that gives the exact inverse of the overlap of two lists.
+
 **Usage**  
 
 ```
@@ -353,7 +355,7 @@ optional arguments:
                    use is inconsistent among the sources.
 ```
 
-**EXAMPLE OF INPUT AND OUTOUT for `subtract_data_on_line_using_word_list.py` with `--data_substring_suffices` flag used:**
+**EXAMPLE OF INPUT AND OUTPUT for `subtract_data_on_line_using_word_list.py` with `--data_substring_suffices` flag used:**
 
 **original input for list_file:**  
 (text in three files with each column below representing contents of a file)
@@ -438,7 +440,7 @@ Since data mining and text manipulations are at the heart of many of my computat
 
 - [My YeastMine code repository](https://github.com/fomightez/yeastmine) 
 
-  * In particular, `compare_results_systematic_to_std.py` under "Evaluation" sub-folder [here](https://github.com/fomightez/yeastmine/tree/master/evaluation) is to highlight differences between a list. (Despite name, I think it is rather generally applicable. Or did I recognize `diff` , and/or for just a handful of total files, Text Wrangler, as good enough and didn't bother generalizing?)
+  * In particular, `compare_results_systematic_to_std.py` under "Evaluation" sub-folder [here](https://github.com/fomightez/yeastmine/tree/master/evaluation) is to highlight differences between a list with regard to whether each corresponding line is the same between both files. (Despite name, I think it is rather generally applicable. Or did I recognize `diff` , and/or for just a handful of total files, Text Wrangler, as good enough and didn't bother generalizing?) (If you are just looking to get difference between two lists that are in file form, i.e., those line/items that occur in one file, but not the other without regard to specific line number, you can use the `subtract_data_on_line_using_word_list.py` script in this repo, and use as the 'data file' the file to remove lines from to produce the output and use as the 'word list' file the other file, which may have related line/items but that will simply be used for comparison to determine what to remove from the 'data file' and remain untouched. Another way to look at it, if you had list A and list B, using the `subtract_data_on_line_using_word_list.py` script this way with list A as the data file will give you what is unique to list A relative list B, and is thus one part of the inverse operation of the script that identifies overlap; you could concatenate the results of doing that operation in both directions on two files to get the actual inverse of the overlap script, i.e., all items that don't overlap in both lists. As you are more likely to want to know specifically what list is missing something, I don't have a script that gives the exact inverse of the overlap of two lists.)
   * many others in that repo
 
 - [My sequence work repository](https://github.com/fomightez/sequencework)
