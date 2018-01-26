@@ -200,7 +200,9 @@ The overlap represents 37.50% of the list 'list3.txt'.
 Takes a file of words or names (could be gene identifiers, etc.) and then examines another file line by line and only keeps the lines in that file that contain the words or names the user provided.  
 The impetus for this to take a list of genes made using YeastMine and then extract lines from data on genes for just the provided list of genes. However, it is written more general than that to handle any sort of words and then to keep in a lines the "data file" that contain those words.  
 In the file that provides the word/name list, the list can be in almost any form, for example each word or name on a separate line or simply separated by a comma or orther punctuation or a mixture. By default spaces will be taken  as the separation of words/names. If you'd like to specify that individual lines are the basic unit so that you can use more complex names or identifiers like "Mr. Smith", simply add the command line option `--lines`. Some attempt is made to even allow words like "don't" but it might not work for all cases such as the possesive forms of words ending in 's', like "Wiggins'".  Punctuation here refers to any instances of these characters:
-!"#$%&'()*+,-./:;<=>?@[\]^_``{|}~    
+
+  !"#$%&'()*+,-./:;<=>?@[\]^_``{|}~    
+  
 Matching is by default independent of case to make the comparisons more robust. The optional flag `--sensitive` can be used to override that behavior and make
 the comparisons case-sensitive.  
 On the data side, you can specify that the words to match against only need to match a substring in the data lines in order to be kept by using the optional flag `--data_substring_suffices`. As an example, imagine the word list only contains the word "me". In the case of `--data_substring_suffices` a line with the word "some" on it will match and be kept. Whereas without the `--data_substring_suffices` flag, i.e., the default situation, only if the word "me" is on a line will the line be kept. This is useful for gene data because with it you can specify several genes. If you have "snR" as a word in your word list, you'd still get matches to lines containing "snR17" as well as lines containing "snR191".  
@@ -304,14 +306,17 @@ Extracted lines (5 total) saved as 'data_file_extracted.txt'.
 ```
 
 ---
+
 - `subtract_data_on_line_using_word_list.py`
 
 > list of words and a data file --> lines of the data file that contain words in the provided list  
 Takes a file of words or names (could be gene identifiers, etc.) and then examines another file line by line and only keeps the lines in that file that completely lack any of the words or names the user provided.  
 The impetus for this to take a list of genes made using YeastMine and then subtract lines from data on genes to remove the provided list of genes. However, it is written more general than that to handle any sort of words and then to remove lines from the "data file" that contain those words.  
 In the file that provides the word/name list, the list can be in almost any form, for example each word or name on a separate line or simply separated by a comma or orther punctuation or a mixture. By default spaces will be taken as the separation of words/names. If you'd like to specify that individual lines are the basic unit so that you can use more complex names or identifiers like "Mr. Smith", simply add the command line option `--lines`.  
-Some attempt is made to even allow words like "don't" but it might not work for all cases such as the possesive forms of words ending in 's', like "Wiggins'.  Punctuation here refers to any instances of these characters: 
-!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~  
+Some attempt is made to even allow words like "don't" but it might not work for all cases such as the possesive forms of words ending in 's', like "Wiggins'.  Punctuation here refers to any instances of these characters:  
+
+    !"#$%&'()*+,-./:;<=>?@[\]^_`{|}~  
+
 Matching is by default independent of case to make the comparisons more robust. The optional flag `--sensitive` can be used to override that behavior and make the comparisons case-sensitive.  
 On the data side, you can specify that the words to match against only need to match a substring in the data lines in order to be removed by using the optional flag `--data_substring_suffices`. As an example, imagine the word list only contains the word "me". In the case of `--data_substring_suffices` a line with the word "some" on it will match and be removed. Whereas without the `--data_substring_suffices` flag, i.e., the default situation, only if the word "me" is on a line will the line be removed This is useful for gene data because with it you can specify several genes. If you have "snR" as a word in your word list, you'd still get matches to lines containing "snR17" as well as lines containing "snR191".  
 The easiest way to run the script is to provide both the list of words or names file and the "data file" in the same directory with the script. However,if you are familiar with designating paths on the command line, thay can be used when invoking the script and pointing it at the files. The script will save the file in the same directory as the provided data file. 
