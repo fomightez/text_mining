@@ -8,7 +8,8 @@ __version__ = "0.1.0"
 # where the order provided was a result of rank and the two lists are same
 # length and CONTAIN NO DUPLICATES.
 # Content & Arrangement of output inspired in a significant way by 'Rank list' 
-# accessible clicking `Hide sample files and parameters [-]` at [Rank Rank Hypergeometric Overlap:Graeber Lab Homepage:Simple Version(RRHO)](http://systems.crump.ucla.edu/rankrank/rankranksimple.php)
+# accessible clicking `Hide sample files and parameters [-]` at 
+# [Rank Rank Hypergeometric Overlap:Graeber Lab Homepage:Simple Version(RRHO)](http://systems.crump.ucla.edu/rankrank/rankranksimple.php)
 
 # Output meant to complement similarity metric calculation as first used in 
 # `Examining Enrichment in Purified Mitochondria Samples Directly from the Salmon-Quantified Data.ipynb`
