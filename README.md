@@ -444,7 +444,8 @@ Presently a user-unfriendly utility script that needs the list of files hard-cod
 > two ranked lists --> information about how rows change between the two lists.
 Presently a simple utility function to work in a Jupyter notebook.  
 Content & Arrangement of output inspired in a significant way by 'Rank list' accessible clicking `Hide sample files and parameters [-]` at [Rank Rank Hypergeometric Overlap:Graeber Lab Homepage:Simple Version(RRHO)](http://systems.crump.ucla.edu/rankrank/rankranksimple.php).  
-See the documentation within the header of the script for more information.
+See the documentation within the header of the script for more information.  
+I am in the process of making a launchable notebook demonstrating its abilities with a list of yeast genes [here](https://github.com/fomightez/ranked_list_comparison_demo). It will use my [make_simulated_yeast_gene_set.py](https://github.com/fomightez/yeastmine/blob/master/make_simulated_yeast_gene_set.py) script to make a mock gene list.
 
 
 Related scripts
