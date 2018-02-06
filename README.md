@@ -419,7 +419,7 @@ Lines remaining saved as 'data_file_subtracted.txt'.
 > pertinent lines in several files --> all those lines in one file  
 `pull_MATCHING_data_from_files_in_directory.py` takes a directory as an argument and mines for lines in the file(s) matching the text of interest. It only mines the files that match constraints set for the file names. All the lines get saved to a file.  
 For the current version, the text of interest to match and the file name constraints are to be set as user-provided values in the code. Make sure to edit the code to match your needs.  
-Thought it is currently configured to only focus on a directory of files, you can easily direct it at a single file by limiting the file name constraints to only match a single file and point the script at the directory that contains that file.
+Though it is currently configured to only focus on a directory of files, you can easily direct it at a single file by limiting the file name constraints to only match a single file and point the script at the directory that contains that file.
 
 ---
 
@@ -434,6 +434,7 @@ Thought it is currently configured to only focus on a directory of files, you ca
 - `csv_data_to_list.py`
 
 > files with comma-separated values --> specified data from each file printed to stdout as a Python list  
+
 Presently a user-unfriendly utility script that needs the list of files hard-coded. Features a useful function `csv_to_dict` function takes a csv file and returns a dictionary wherec olumn headings (first line of th csv file) are mapped to a list of values for that column. The keys come from the first line of the csv file. Columns designated for the lists are alse set as hard-coded values in the script at this time. 
 
 
@@ -442,6 +443,7 @@ Presently a user-unfriendly utility script that needs the list of files hard-cod
 - `function to generate accounting of positions in two ranked lists.py`
 
 > two ranked lists --> information about how rows change between the two lists.
+
 Presently a simple utility function to work in a Jupyter notebook.  
 Content & Arrangement of output inspired in a significant way by 'Rank list' accessible clicking `Hide sample files and parameters [-]` at [Rank Rank Hypergeometric Overlap:Graeber Lab Homepage:Simple Version(RRHO)](http://systems.crump.ucla.edu/rankrank/rankranksimple.php).  
 See the documentation within the header of the script for more information. Alternatively, because a demonstration is often with more than a lot of words...  
