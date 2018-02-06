@@ -11,6 +11,7 @@
 - `find_overlap_in_lists_with_Venn.py`
 
 >  lists --> list of shared items and a diagram showing relationships between lists  
+
 Like `find_overlap_in_lists.py` (see below), except for in the cases of comparisons involving 2 or 3 list documents, it produces an area-weighted Venn diagram (image file) [depicting the relationships of the items in the lists](https://www.badgrammargoodsyntax.com/compbio/2017/10/29/compbio-012-making-venn-diagrams-the-right-way-using-python) ([or is it a Euler diagram?](https://creately.com/blog/diagrams/venn-diagrams-vs-euler-diagrams/)). 
 For comparing 4 lists, a Venn diagram will also be generated but it will not be area-weighted. To produce a Venn diagram for comparing lists found in four separate documents, it requires `venn4_from_github.py` (see below) in the same directory. This additional script is not needed in the cases comparing two or three lists.  
 The output files produced will include `_shared_items` and `_overlap_` which can be used to easily track the newly created files, for example, after running the script you can run a move command to take advantage of this information to move the newly created files to a directory, such as `mkdir new_data; mv *_shared_items* new_data/; mv *_overlap_* new_data/`.  
@@ -113,6 +114,7 @@ Image of overlap of the lists saved as 'list1_and_2others_overlap_representation
 - `find_overlap_in_lists.py`
 
 > lists --> list of shared items  
+
 Takes files with items listed one item to a line and determines items that occur in all the lists. Thus, it identifies only those items shared by all the lists of items. It was intended to be used for lists of genes, it but can work for any type of list.  
 A file listing the shared items (genes) will be produced.  
 The default settings cause the comparisons to be case-insensitive with the caveat that the case of the shared items listed in the output file will be determined by whatever list is provided in the first position of the file name list when calling the script.  
@@ -196,7 +198,8 @@ The overlap represents 37.50% of the list 'list3.txt'.
 
 - `extract_data_on_line_using_word_list.py`
 
-> list of words and a data file --> lines of the data file that contain words in the provided list  
+> list of words and a data file --> lines of the data file that contain words in the provided list 
+
 Takes a file of words or names (could be gene identifiers, etc.) and then examines another file line by line and only keeps the lines in that file that contain the words or names the user provided.  
 The impetus for this to take a list of genes made using YeastMine and then extract lines from data on genes for just the provided list of genes. However, it is written more general than that to handle any sort of words and then to keep in a lines the "data file" that contain those words.  
 In the file that provides the word/name list, the list can be in almost any form, for example each word or name on a separate line or simply separated by a comma or orther punctuation or a mixture. By default spaces will be taken  as the separation of words/names. If you'd like to specify that individual lines are the basic unit so that you can use more complex names or identifiers like "Mr. Smith", simply add the command line option `--lines`. Some attempt is made to even allow words like "don't" but it might not work for all cases such as the possesive forms of words ending in 's', like "Wiggins'".  Punctuation here refers to any instances of these characters:
@@ -310,6 +313,7 @@ Extracted lines (5 total) saved as 'data_file_extracted.txt'.
 - `subtract_data_on_line_using_word_list.py`
 
 > list of words and a data file --> lines of the data file that contain words in the provided list  
+
 Takes a file of words or names (could be gene identifiers, etc.) and then examines another file line by line and only keeps the lines in that file that completely lack any of the words or names the user provided.  
 The impetus for this to take a list of genes made using YeastMine and then subtract lines from data on genes to remove the provided list of genes. However, it is written more general than that to handle any sort of words and then to remove lines from the "data file" that contain those words.  
 In the file that provides the word/name list, the list can be in almost any form, for example each word or name on a separate line or simply separated by a comma or orther punctuation or a mixture. By default spaces will be taken as the separation of words/names. If you'd like to specify that individual lines are the basic unit so that you can use more complex names or identifiers like "Mr. Smith", simply add the command line option `--lines`.  
@@ -417,6 +421,7 @@ Lines remaining saved as 'data_file_subtracted.txt'.
 - `pull_MATCHING_data_from_files_in_directory.py`
 
 > pertinent lines in several files --> all those lines in one file  
+
 `pull_MATCHING_data_from_files_in_directory.py` takes a directory as an argument and mines for lines in the file(s) matching the text of interest. It only mines the files that match constraints set for the file names. All the lines get saved to a file.  
 For the current version, the text of interest to match and the file name constraints are to be set as user-provided values in the code. Make sure to edit the code to match your needs.  
 Though it is currently configured to only focus on a directory of files, you can easily direct it at a single file by limiting the file name constraints to only match a single file and point the script at the directory that contains that file.
