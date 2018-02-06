@@ -17,6 +17,7 @@ __version__ = "0.1.0"
 # Right now drafting to work for loading into a Jupyter notebook cell since I
 # have been working a lot there and have need for this ability now. Could always
 # expand into a stand-alone `runnable` or importable function/script later.
+# Demo notebook at https://github.com/fomightez/ranked_list_comparison_demo
 
 def generate_reports_for_ranked_lists_pos(lizt1,
                                         lizt2,
