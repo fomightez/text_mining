@@ -489,3 +489,16 @@ Related scripts by others
 Handy, related utilities authored by others:
 
 - [CSVtoTable](https://github.com/vividvilla/csvtotable) - Simple, Python-based command-line utility to convert CSV files to searchable and sortable HTML table. (Note that it looks like editing the function `convert` [here](https://github.com/vividvilla/csvtotable/blob/master/csvtotable/convert.py) it could be made to handle TSV files.
+
+
+
+Image mining
+------------
+
+** MEANT FOR MOVING TO ELSEWHERE **
+
+I don't yet have a repository for this subject, and so putting this start of one here in the hopes I stumble upon this 'mining' info when needed:
+
+[Python Script to download hundreds of images from 'Google Images'. It is a ready-to-run code!](https://github.com/hardikvasa/google-images-download)
+>"if you are looking for a handy python  script for 'searching' and 'downloading' hundreds of Google images to the local hard disk for you next DL project, that's the one:" - SOURCE:https://twitter.com/rasbt/status/982822969947848704 
+And one in reply uses  "selenium to download images from google search".
