@@ -454,6 +454,11 @@ Content & Arrangement of output inspired in a significant way by 'Rank list' acc
 See the documentation within the header of the script for more information. Alternatively, because a demonstration is often with more than a lot of words...  
 I made launchable notebook demonstrating its abilities with a list of yeast genes [here](https://github.com/fomightez/ranked_list_comparison_demo). In developing it, I used my [make_simulated_yeast_gene_set.py](https://github.com/fomightez/yeastmine/blob/master/make_simulated_yeast_gene_set.py) script to make a mock gene list.
 
+- `collecting a column in tabbed input - specfically XXXXX.py` (*Not here yet because needs further editing but drafted*)
+
+> TSV formatted table-like text (tab-delimited text) --> extracted column
+
+info here
 
 Related scripts
 ---------------
