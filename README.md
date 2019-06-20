@@ -496,6 +496,12 @@ Handy, related utilities authored by others:
 - [CSVtoTable](https://github.com/vividvilla/csvtotable) - Simple, Python-based command-line utility to convert CSV files to searchable and sortable HTML table. (Note that it looks like editing the function `convert` [here](https://github.com/vividvilla/csvtotable/blob/master/csvtotable/convert.py) it could be made to handle TSV files.
 
 
+Beyond simple text mining
+-------------------------
+
+See [here](https://github.com/fomightez/sequencework/blob/master/Extract_Details_or_Annotation/README.md#related-efforts-by-others) for "a deep-learning based tool for information extraction in the biomedical domain".
+
+
 
 Image mining
 ------------
