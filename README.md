@@ -485,8 +485,8 @@ Since data mining and text manipulations are at the heart of many of my computat
 Related Gists
 -------------
 
-- [Text list ===> Python-code list object](http://roughdraft.io/e6695e3ee16430ef228e1d7c4cb761c1)
-- [Text lists ===> Python Pandas dataframe](http://roughdraft.io/e183bbc819ce7b188e1c268f9edd1388)
+- [Text list ===> Python-code list object](https://nicegist.github.io/e6695e3ee16430ef228e1d7c4cb761c1)
+- [Text lists ===> Python Pandas dataframe](https://nicegist.github.io/e183bbc819ce7b188e1c268f9edd1388)
 
 Related scripts by others
 -------------------------
