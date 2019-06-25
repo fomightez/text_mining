@@ -14,7 +14,8 @@ __version__ = "0.1.0"
 #
 #
 # PURPOSE: Takes a dataframe, and some information about columns in the 
-# dataframe and 
+# dataframe and makes a summary data table with the percents for each 
+# subgrouping state per total and each group. 
 # The dataframe can also be provided as pickled or text form saved as a file.
 #
 #
@@ -252,6 +253,8 @@ def cast_to_number(s):
 
 ###--------------------------END OF HELPER FUNCTIONS--------------------------###
 ###--------------------------END OF HELPER FUNCTIONS--------------------------###
+
+
 
 #*******************************************************************************
 ###------------------------'main' function of script--------------------------##

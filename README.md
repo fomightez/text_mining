@@ -436,6 +436,13 @@ Though it is currently configured to only focus on a directory of files, you can
 
 ---
 
+- `df_subgroups_states2summary_df.py`
+
+> dataframe of data --> summary data table with the percents for each subgrouping state per total and each group. 
+
+
+---
+
 - `csv_data_to_list.py`
 
 > files with comma-separated values --> specified data from each file printed to stdout as a Python list  
