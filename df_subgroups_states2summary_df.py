@@ -308,7 +308,7 @@ def df_subgroups_states2summary_df(
         group_state_names = dfgp.index.tolist()
         gcount_n_percent = zip(dfgc,dfgp)
         gcount_n_percent_d = dict(zip(group_state_names,gcount_n_percent))
-        group_dict["{} [{}]".format(name,len(group))]= gcount_n_percent_d 
+        group_dict[name]= gcount_n_percent_d 
         gcount_n_percent_d_to_tuples = (
             x for y in gcount_n_percent_d.values() for x in y)
         group_list.append((name,*gcount_n_percent_d_to_tuples)) #cannot use this
@@ -338,9 +338,7 @@ def df_subgroups_states2summary_df(
     # didn't actually seem to take a dictionary.
     # Need to adjust the 'total' one similarly, can tag with 'ALL' name at 
     # same time
-    all_indx_txt = "ALL [{}]".format(total_subgroup_instances)
-    better_total_d = split_out_count_and_percent(
-        {all_indx_txt:count_n_percent_d})
+    better_total_d = split_out_count_and_percent({"ALL":count_n_percent_d})
     # Make a dataframe from the 'better'TOTAL dict
     totaldf = pd.DataFrame.from_dict(better_total_d, orient='index').fillna(0)
     # impose order to 'total',if specified, since it will be on top
@@ -354,10 +352,13 @@ def df_subgroups_states2summary_df(
     # https://stackoverflow.com/a/50501889/8508004 about addition of 
     # `sort= False` because I want to keep columns in the order established 
     # prior.
+    #add total count across each row, which are the groups
+    the_c_cols = [x for x in almostfinal_df.columns if x.endswith('_c')]
+    almostfinal_df.insert(0, '[n]', almostfinal_df[the_c_cols].sum(1) )
     #Replace the column names in almostfinal_df with the multiindex with counts
     #and percent
-    tuples = list(zip([x.rsplit(
-        "_")[0] for x in almostfinal_df.columns],itertools.cycle(
+    tuples = [("",almostfinal_df.columns[0])] + list(zip([x.rsplit(
+        "_")[0] for x in almostfinal_df.columns[1:]],itertools.cycle(
         ["count","%"])))
     the_multiindex = pd.MultiIndex.from_tuples(tuples)
     df2 = almostfinal_df.set_axis(the_multiindex, axis=1, inplace=False)#merging
