@@ -1,11 +1,11 @@
 #!/usr/bin/env python
-# df_subgroups_states2summary_df.py
+# df_binary_states2summary_df.py
 __author__ = "Wayne Decatur" #fomightez on GitHub
 __license__ = "MIT"
 __version__ = "0.1.0"
 
 
-# df_subgroups_states2summary_df.py by Wayne Decatur
+# df_binary_states2summary_df.py by Wayne Decatur
 # ver 0.1
 #
 #*******************************************************************************
@@ -14,8 +14,7 @@ __version__ = "0.1.0"
 #
 #
 # PURPOSE: Takes a dataframe, and some information about columns in the 
-# dataframe and makes a summary data table with the percents for each 
-# subgrouping state per total and each group. 
+# dataframe and 
 # The dataframe can also be provided as pickled or text form saved as a file.
 #
 #
@@ -23,13 +22,13 @@ __version__ = "0.1.0"
 #
 #
 #
-# Meant to sort of be a text way based to summarize data similar to what
+# Meant to sort of be a text way based to summarize binary data similar to what
 # I ended up making with 
-# `donut_plot_with_total_summary_and_subgroups_from_dataframe.py`
-# for development, see 
-# `developing making dataframe summarizing groups and subgroups with counts and percent.ipynb`
-# The initial parts, dataframe or tabular text (text table) handling and initial
-# dataframe munging inherit largely from my related donut plot plotting scripts.
+# `donut_plot_with_total_binary_summary_and_binary_state_subgroups.py`
+# for development, see `df_subgroups_states2summary_df.py` as this inherits most 
+# of code from there. I simply added some additonal handling taking advatange of 
+# the fact subgroups are binary, and so you probably want to display one of them
+# and leave the other as inferred by subtraction from 100%.
 # 
 #
 #
@@ -46,7 +45,7 @@ __version__ = "0.1.0"
 
 #
 # To do:
-# - test with Python 2 as well
+# -  
 #
 #
 #
@@ -55,9 +54,9 @@ __version__ = "0.1.0"
 # Examples,
 # Enter on the command line of your terminal, the line
 #-----------------------------------
-# python df_subgroups_states2summary_df.py data.tsv groups_col subgroups_col
+# python df_binary_states2summary_df.py data.tsv groups_col states_col
 #-----------------------------------
-# Issue `df_subgroups_states2summary_df.py -h` for 
+# Issue `df_binary_states2summary_df.py -h` for 
 # details.
 # 
 #
@@ -65,16 +64,16 @@ __version__ = "0.1.0"
 #
 # To use this after importing into a cell in a Jupyter 
 # notebook, specify at least XXXXXXXXXXX????????:
-# from df_subgroups_states2summary_df import df_subgroups_states2summary_df
-# df_subgroups_states2summary_df(df_file="data.tsv",groups_col="status",subgroups_col="subtype");
+# from df_binary_states2summary_df import df_binary_states2summary_df
+# df_binary_states2summary_df(df_file="data.tsv",groups_col="status",states_col="subtype");
 #
 # 
 #
 '''
 CURRENT ACTUAL CODE FOR RUNNING/TESTING IN A NOTEBOOK WHEN IMPORTED/LOADED OR 
 PASTED IN ANOTHER CELL:
-from df_subgroups_states2summary_df import df_subgroups_states2summary_df
-df_subgroups_states2summary_df(df_file="data.tsv",groups_col="Manufacturer",subgroups_col="In_Stock");
+from df_binary_states2summary_df import df_binary_states2summary_df
+df_binary_states2summary_df(df_file="data.tsv",groups_col="Manufacturer",states_col="In_Stock");
 '''
 #
 #
@@ -197,7 +196,6 @@ def split_out_count_and_percent(d):
         better_d[k] = new_sub_dict
     return better_d
 
-
 def is_number(s):
     '''
     check if a string can be cast to a float or numeric (integer).
@@ -271,22 +269,25 @@ def put_counts_in_brackets_after_perc(row_items):
             row_items[i+1],int(row_items[i]))
     return row_items
 
+
 ###--------------------------END OF HELPER FUNCTIONS--------------------------###
 ###--------------------------END OF HELPER FUNCTIONS--------------------------###
+
 
 
 
 #*******************************************************************************
 ###------------------------'main' function of script--------------------------##
 
-def df_subgroups_states2summary_df(
-    df_file=None, df=None, groups_col=None, subgroups_col=None,order=None,
+def df_binary_states2summary_df(
+    df_file=None, df=None, groups_col=None, states_col=None,display_state=None,
     only_subgrp_perc=False, bracket_counts=False, 
     save_name_prefix = save_name_prefix):
     '''
     Takes a dataframe with some information on groups and subgroupings/states &
-    makes a summary data table the percents for each subgrouping per total and 
-    each group.
+    summarizes the percents for each subgrouping per total and each group.
+
+    ONLY WORKS WITH BINARY DATA in the STATE (SUBGROUPS) COLUMN. 
 
     The dataframe can also be provided as pickled or text form saved as a file.
 
@@ -297,8 +298,9 @@ def df_subgroups_states2summary_df(
     - text of name of column to use in states/subgroupings . These will 
     determine the groupings shown in the columns with count and percents for
     each one if using default settings.
-    - Optionlly specify an order to list the states subgroups by providing a 
-    Python list as `order`.
+    - the subgroup/state to feature in the final summary. The idea is that this
+    is the positive/presence to aspect you want to feature where the other 
+    trait is then inferred by subtraction from 100%.
     - Optionally, set things to not show the counts for each state/subgroup and
     instead just leave the percent for each. Set with `only_subgrp_perc=True`.
     - Optionally, make at least one resulting summary that has counts bracketed 
@@ -317,12 +319,38 @@ def df_subgroups_states2summary_df(
         # use file extension to decide how to parse dataframe file.
         df = extract_dataframe(df_file)
 
+    # Check if state column to use is actually binary data. If it isn't, can
+    # it be made to be by discarding NA or Nan or None, i.e., 'missing' data? 
+    # That is unless the setting not to deal with missing data has been set.
+    # Added that state column result in one state because could all be one of 
+    # the two possible states. 
+    if not 2 >= len(set(df[states_col].tolist())) > 0:
+        # copy original dataframe for easy comparison.
+        orig_df = df.copy()
+        # try removing any NA, Nan, or none & report doing that.
+        df[states_col].replace('None', np.nan, inplace=True) #If any `None`
+        # happen to be strings, convert them now before removing.
+        df.dropna(subset=[states_col])
+        if len(df) < len(orig_df):
+            sys.stderr.write("WARNING: Rows with missing data in the state "
+                "column removed.")
+            sys.stderr.write("\n{} rows were removed.".format(
+                len(orig_df) - len(df)))
+            # if any removed, reflect that in assert message
+            if len(df) < len(orig_df):
+                assert 2 >= len(set(df[states_col].tolist())) > 0, ("The "
+                    "column designated as representing binary data contains "
+                    "more than "
+                    "two states, even if 'missing' values are removed.")
+    assert 2 >= len(set(df[states_col].tolist())) > 0, ("The column "
+        "designated as representing binary data contains more than two states.")
+
 
 
     # Prepare derivatives of the dataframe that may be needed for collecting the
     # necessary summarizing data
     #---------------------------------------------------------------------------
-    tc = df[subgroups_col].value_counts()
+    tc = df[states_col].value_counts()
     total_state_names = tc.index.tolist()
     total_state_size = tc.tolist()
     grouped = df.groupby(groups_col)
@@ -335,36 +363,28 @@ def df_subgroups_states2summary_df(
     list_o_subgroup_size_l = []
     group_dict = {}
     group_list = []
-
     for name,group in grouped:
-        dfgc = group[subgroups_col].value_counts()
-        dfgp = group[subgroups_col].value_counts(normalize=True)
+        dfgc = group[states_col].value_counts()
+        dfgp = group[states_col].value_counts(normalize=True)
         #if sort_on_subgroup_name:
-        #   dfgc = group[subgroups_col].value_counts().sort_index()
-        #   dfgp = group[subgroups_col].value_counts(
-        #       normalize=True).sort_index()
+        #   dfgc = group[states_col].value_counts().sort_index()
+        #   dfgp = group[states_col].value_counts(normalize=True).sort_index()
         list_o_subgroup_names_l.append(dfgc.index.tolist())
         list_o_subgroup_size_l.append(dfgc.tolist())
         group_state_names = dfgp.index.tolist()
         gcount_n_percent = zip(dfgc,dfgp)
         gcount_n_percent_d = dict(zip(group_state_names,gcount_n_percent))
         group_dict[name]= gcount_n_percent_d 
-        gcount_n_percent_d_to_tuples = (
-            x for y in gcount_n_percent_d.values() for x in y)
-        group_list.append((name,*gcount_n_percent_d_to_tuples)) #cannot use this
-        # to create dataframe because cannot do `.fillna(0)` to fill in the 
-        # empties, I think
+        gcount_n_percent_d_to_tuples = (x for y in gcount_n_percent_d.values() for x in y)
+        group_list.append((name,*gcount_n_percent_d_to_tuples)) #cannot use this to create dataframe because cannot do `.fillna(0)` to fill in the empties, I think
     total_subgroup_instances = sum(tc)
     # sanity check
-    assert len(df) == total_subgroup_instances, ("The subgroup instances should"
-        " be length of original dataframe.")
+    assert len(df) == total_subgroup_instances, "The subgroup instances should be length of original dataframe."
 
-    tp = df[subgroups_col].value_counts(normalize=True)
+    tp = df[states_col].value_counts(normalize=True)
     total_state_names = tp.index.tolist()
-    tp_d = dict(zip(df[subgroups_col].value_counts(
-        normalize=True),df[subgroups_col].value_counts()))
-    count_n_percent = zip(df[subgroups_col].value_counts(
-        ),df[subgroups_col].value_counts(normalize=True))
+    tp_d = dict(zip(df[states_col].value_counts(normalize=True),df[states_col].value_counts()))
+    count_n_percent = zip(df[states_col].value_counts(),df[states_col].value_counts(normalize=True))
     count_n_percent_d = dict(zip(total_state_names,count_n_percent))
     # adjust group dict to split out count and percent in a way to make them 
     # ultimately columns in dataframe
@@ -378,15 +398,11 @@ def df_subgroups_states2summary_df(
     # didn't actually seem to take a dictionary.
     # Need to adjust the 'total' one similarly, can tag with 'ALL' name at 
     # same time
-    better_total_d = split_out_count_and_percent({"ALL":count_n_percent_d})
+    all_indx_txt = "ALL [{}]".format(total_subgroup_instances)
+    better_total_d = split_out_count_and_percent(
+        {all_indx_txt:count_n_percent_d})
     # Make a dataframe from the 'better'TOTAL dict
     totaldf = pd.DataFrame.from_dict(better_total_d, orient='index').fillna(0)
-    # impose order to 'total',if specified, since it will be on top
-    if order:
-        order = list(itertools.chain.from_iterable(
-            ( "{}_c".format(x),"{}_p".format(x) ) for x in order)) # see 
-        # https://stackoverflow.com/a/11868996/8508004
-        totaldf = totaldf[order] 
     # combine the dataframes
     almostfinal_df = pd.concat([totaldf,almostdf], sort= False) # see 
     # https://stackoverflow.com/a/50501889/8508004 about addition of 
@@ -395,30 +411,47 @@ def df_subgroups_states2summary_df(
     #add total count across each row, which are the groups
     the_c_cols = [x for x in almostfinal_df.columns if x.endswith('_c')]
     almostfinal_df.insert(0, '[n]', almostfinal_df[the_c_cols].sum(1) )
-    #Replace the column names in almostfinal_df with the multiindex with counts
-    #and percent
-    tuples = [("",almostfinal_df.columns[0])] + list(zip([x.rsplit(
-        "_")[0] for x in almostfinal_df.columns[1:]],itertools.cycle(
+    #Replace the column names in almostfinal_df with the multiindex with counts and percent
+    tuples = list(zip([x.rsplit(
+        "_")[0] for x in almostfinal_df.columns],itertools.cycle(
         ["count","%"])))
     the_multiindex = pd.MultiIndex.from_tuples(tuples)
     df2 = almostfinal_df.set_axis(the_multiindex, axis=1, inplace=False)#merging
     # the multiindex into the already created dataframe based on 
     # https://stackoverflow.com/a/49909924/8508004
+    # Restrict to just the state want to display
+    df2 = df2[display_state]
+    df2.iloc[:, df2.columns.get_level_values(0).isin({"",display_state})] #based 
+    # on https://stackoverflow.com/a/18470819/8508004; related to 
+    # https://stackoverflow.com/a/25190070/8508004
+
 
     # leave only percents or bracket the counts for presentation if specified
     if only_subgrp_perc:
         df2.iloc[:, df2.columns.get_level_values(1).isin({"[n]","%"})] #based on 
         # https://stackoverflow.com/a/18470819/8508004; related to 
         # https://stackoverflow.com/a/25190070/8508004
+        new_col = list(df2.columns.get_level_values(0))
+        new_col[0] = df2.columns.get_level_values(1)[0]
+        new_col[1] = states_col
+        df2.columns = new_col # collapse levels of column names, applying the 
+        # `states_col` name as the column name for the percent
     elif bracket_counts:
         # this will make df3
         bc_df = almostfinal_df.copy() # go back to this one because no 
         # multiindex yet and all columns are distinct names;could collapse 
         # column levels of df2 but then non-uniuqe names
-        df3 = bc_df.apply(put_counts_in_brackets_after_perc, axis=1)
+        df3  = bc_df.apply(put_counts_in_brackets_after_perc, axis=1)
         subset_list = [x for x in df3.columns if x[-2:] not in ['_c', '_p']]
         df3 = df3[subset_list]
-        
+        # since went back to `almostfinal_df` for this, also have to subst to 
+        # choice for state to display
+        subset_list = [x for x in df3.columns if x in ['[n]',display_state]]
+        df3 = df3[subset_list]
+        new_col = list(df3.columns)
+        new_col[1] = states_col
+        df3.columns = new_col # apply the `states_col` name as the column name
+        #for the percent since displaying only 'positive' aspect
 
     # Returning or Saving
     #--------------------------------------------------------------------
@@ -487,13 +520,12 @@ def main():
     # with a distinguishing name in Jupyter notebooks, where `main()` may get
     # assigned multiple times depending how many scripts imported/pasted in.
     kwargs = {}
-    kwargs['order'] = order
+    kwargs['display_state'] = display_state
     kwargs['only_subgrp_perc'] = args.only_subgrp_perc
     kwargs['bracket_counts'] = args.bracket_counts
-
-    df_subgroups_states2summary_df(
+    df_binary_states2summary_df(
         df_file=args.df_file,groups_col=args.groups_col,
-        subgroups_col=args.subgroups_col,**kwargs)
+        states_col=args.states_col,**kwargs)
     # using https://www.saltycrane.com/blog/2008/01/how-to-use-args-and-kwargs-in-python/#calling-a-function
     # to build keyword arguments to pass to the function above
     # (see https://stackoverflow.com/a/28986876/8508004 and
@@ -508,11 +540,11 @@ def main():
 if __name__ == "__main__":
     ###-----------------for parsing command line arguments-------------------###
     import argparse
-    parser = argparse.ArgumentParser(prog='df_subgroups_states2summary_df.py',
-        description="df_subgroups_states2summary_df.py \
+    parser = argparse.ArgumentParser(prog='df_binary_states2summary_df.py',
+        description="df_binary_states2summary_df.py \
         takes a dataframe, and some information about columns in the dataframe \
-        and makes a summary data table with the percents for each subgrouping \
-        / state per total and each group. \
+        and makes a summary data table with the percent for a specified state \
+        per total and each group / category.\
         **** Script by Wayne Decatur   \
         (fomightez @ github) ***")
 
@@ -527,21 +559,23 @@ if __name__ == "__main__":
         dataframe to use as main grouping categories.\
         ", metavar="GROUPS")
 
-    parser.add_argument("subgroups_col", help="Text indicating column in \
-        dataframe to use as subgroupings / states for the groups.\
-        ", metavar="SUBGROUPS")
+    parser.add_argument("states_col", help="Text indicating column in \
+        dataframe to use as the binary states.\
+        ", metavar="STATES_COL")
 
-    parser.add_argument('-ord', '--order', action='store', type=str, 
-        help="This flag is used to specify that you want to control the order \
-        of the subgroups to read from left to right. Follow the flag with an \
-        order listing, left to right, \
-        of the subgroup identifiers separated by \
-        commas, without spaces or quotes. For example `-ord yes,maybe,no`. \
-         ")# based on https://stackoverflow.com/a/24866869/8508004
+    parser.add_argument("display_state", help="Text indicating corresponding \
+        'positive' state (subgrouping) that will have corresponding values \
+        displayed in summary with other state left as inferred. For example, if\
+        states possible are 'yes' or 'no', you'd want to display \
+        the percent and or counts of 'yes' and leave the 'no' as inferred.\
+        ", metavar="STATE_TO_SHOW")
 
     parser.add_argument("-olsp", "--only_subgrp_perc",help=
         "add this flag to only leave states/percentage data in produced data \
-        table. No counts will be included for each state/subgrouping.",
+        table. No counts will be included for each state/subgrouping. When \
+        this is used the column will get name of the `states_col` applied as \
+        it shows the percent corresponding to the 'positive' state in the \
+        column.",
         action="store_true")
 
     parser.add_argument("-bc", "--bracket_counts",help=
@@ -549,10 +583,15 @@ if __name__ == "__main__":
         This is only meant for generating presentation style dataframes as the \
         percent & count data will be combined into one cell as a string which \
         is not suitable for further use. Because of that this option will also \
-        produce a more basic summary table to be used for further efforts. Use \
-        of  `--only_subgrp_perc` renders this argument moot as nothing \
-        concerning counts is displayed in that case.",
+        produce a more basic summary table to be used for further efforts. \
+        When this is used the column will get name of the `states_col` applied \
+        as it shows the percent corresponding to the 'positive' state in the \
+        column. Use of  `--only_subgrp_perc` renders this argument moot as \
+        nothing concerning counts is displayed in that case.",
         action="store_true")
+
+
+
 
 
 
@@ -562,19 +601,8 @@ if __name__ == "__main__":
         parser.print_help()
         sys.exit(1)
     args = parser.parse_args()
-    order = args.order
-    #process to a python list if it exists
-    if order:
-        order = args.order.split(',')
-        #if they hapen to be integers or floats, convert so will match type in 
-        # dataframe
-        if all([is_number(s) for s in order]):
-            order = [cast_to_number(s) for s in order]
-            # make sure all float if any are float, because line above will 
-            # cast to integer if possible
-            if any(isinstance(x, float) for x in order):
-                order = [float(x) for x in order]
-    
+    display_state = args.display_state
+
 
 
 
