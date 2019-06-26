@@ -443,6 +443,14 @@ Though it is currently configured to only focus on a directory of files, you can
 
 ---
 
+- `df_binary_states2summary_df.py`
+
+> dataframe of data --> summary data table with the percents for the 'positive' state per total and each group. 
+
+Only works with binary states / subgroups because summarizes even further than `df_subgroups_states2summary_df.py` to just leave the 'positive' state and the other part is inferred by subtraction from 100%.
+
+---
+
 - `csv_data_to_list.py`
 
 > files with comma-separated values --> specified data from each file printed to stdout as a Python list  
