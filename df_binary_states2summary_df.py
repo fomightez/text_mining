@@ -398,9 +398,7 @@ def df_binary_states2summary_df(
     # didn't actually seem to take a dictionary.
     # Need to adjust the 'total' one similarly, can tag with 'ALL' name at 
     # same time
-    all_indx_txt = "ALL [{}]".format(total_subgroup_instances)
-    better_total_d = split_out_count_and_percent(
-        {all_indx_txt:count_n_percent_d})
+    better_total_d = split_out_count_and_percent({"ALL":count_n_percent_d})
     # Make a dataframe from the 'better'TOTAL dict
     totaldf = pd.DataFrame.from_dict(better_total_d, orient='index').fillna(0)
     # combine the dataframes
@@ -412,23 +410,28 @@ def df_binary_states2summary_df(
     the_c_cols = [x for x in almostfinal_df.columns if x.endswith('_c')]
     almostfinal_df.insert(0, '[n]', almostfinal_df[the_c_cols].sum(1) )
     #Replace the column names in almostfinal_df with the multiindex with counts and percent
-    tuples = list(zip([x.rsplit(
-        "_")[0] for x in almostfinal_df.columns],itertools.cycle(
+    tuples = [("",almostfinal_df.columns[0])] + list(zip([x.rsplit(
+        "_")[0] for x in almostfinal_df.columns[1:]],itertools.cycle(
         ["count","%"])))
     the_multiindex = pd.MultiIndex.from_tuples(tuples)
     df2 = almostfinal_df.set_axis(the_multiindex, axis=1, inplace=False)#merging
     # the multiindex into the already created dataframe based on 
     # https://stackoverflow.com/a/49909924/8508004
     # Restrict to just the state want to display
-    df2 = df2[display_state]
-    df2.iloc[:, df2.columns.get_level_values(0).isin({"",display_state})] #based 
-    # on https://stackoverflow.com/a/18470819/8508004; related to 
+    #df2 = df2[display_state] # <--Interestingly this worked if just wanted the 
+    # display state columns to remain (so it must default to the zero level to 
+    # act on) but since I added total counts per subgroup as a column, I need to 
+    # get that too.
+    df2 = df2.iloc[:, df2.columns.get_level_values(
+    0).isin({"",display_state})] #based on 
+    # https://stackoverflow.com/a/18470819/8508004; related to 
     # https://stackoverflow.com/a/25190070/8508004
 
 
     # leave only percents or bracket the counts for presentation if specified
     if only_subgrp_perc:
-        df2.iloc[:, df2.columns.get_level_values(1).isin({"[n]","%"})] #based on 
+        df2 = df2.iloc[:, df2.columns.get_level_values(
+        1).isin({"[n]","%"})] #based on 
         # https://stackoverflow.com/a/18470819/8508004; related to 
         # https://stackoverflow.com/a/25190070/8508004
         new_col = list(df2.columns.get_level_values(0))

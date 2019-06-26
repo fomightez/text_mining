@@ -407,7 +407,8 @@ def df_subgroups_states2summary_df(
 
     # leave only percents or bracket the counts for presentation if specified
     if only_subgrp_perc:
-        df2.iloc[:, df2.columns.get_level_values(1).isin({"[n]","%"})] #based on 
+        df2 = df2.iloc[:, df2.columns.get_level_values(
+        1).isin({"[n]","%"})] #based on 
         # https://stackoverflow.com/a/18470819/8508004; related to 
         # https://stackoverflow.com/a/25190070/8508004
     elif bracket_counts:
