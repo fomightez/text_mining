@@ -345,6 +345,9 @@ def df_binary_states2summary_df(
     assert 2 >= len(set(df[states_col].tolist())) > 0, ("The column "
         "designated as representing binary data contains more than two states.")
 
+    assert display_state != None, ("The one state or subgroup to feature in "
+        "display needs to be specified.")
+
 
 
     # Prepare derivatives of the dataframe that may be needed for collecting the
