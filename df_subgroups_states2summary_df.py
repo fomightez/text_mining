@@ -411,6 +411,10 @@ def df_subgroups_states2summary_df(
         1).isin({"[n]","%"})] #based on 
         # https://stackoverflow.com/a/18470819/8508004; related to 
         # https://stackoverflow.com/a/25190070/8508004
+        new_col = list(df2.columns.get_level_values(0))
+        new_col[0] = df2.columns.get_level_values(1)[0]
+        df2.columns = new_col # collapse levels of column names, applying the 
+        # `states_col` name as the column name for the percent
     elif bracket_counts:
         # this will make df3
         bc_df = almostfinal_df.copy() # go back to this one because no 
