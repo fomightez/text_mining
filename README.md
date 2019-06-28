@@ -438,7 +438,7 @@ Though it is currently configured to only focus on a directory of files, you can
 
 - `df_subgroups_states2summary_df.py`
 
-> dataframe of data --> summary data table with the percents for each subgrouping state per total and each group. 
+> dataframe of data --> summary data table with the ratio or percents for each subgrouping state per total and each group. 
 
 It's use is compared/contrasted with donut plots with the same data [here](https://nbviewer.jupyter.org/github/fomightez/donut_plots_with_subgroups/blob/master/index.ipynb) and [here](https://nbviewer.jupyter.org/github/fomightez/donut_plots_with_subgroups/blob/master/demo_summary_subgroups.ipynb). Those notebooks can be launched in active form via the Binder service [here](https://github.com/fomightez/donut_plots_with_subgroups). Depending on the formatting of the data table output the summary data table and the donut plot can be complementary, too.
 
@@ -446,7 +446,7 @@ It's use is compared/contrasted with donut plots with the same data [here](https
 
 - `df_binary_states2summary_df.py`
 
-> dataframe of data --> summary data table with the percents for the 'positive' state per total and each group. 
+> dataframe of data --> summary data table with the ratio or percents for the 'positive' state per total and each group. 
 
 Only works with binary states / subgroups because summarizes even further than `df_subgroups_states2summary_df.py` to just leave the 'positive' state and the other part is inferred by subtraction from 100%.
 
