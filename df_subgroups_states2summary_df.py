@@ -256,10 +256,10 @@ def put_counts_in_brackets_after_perc(row_items):
     '''
     Takes a row of summarized data where the first column is a total number and 
     each set of two columns after that is a coupled set where the first is the 
-    counts and the next is the ratio as a decimal. First column that doesn't get 
-    further addressed here; each set of coupled two columns get combined into 
-    one where ratio as a percent and counts in a single new cell that gets the 
-    first part of the name of each coupled column set.
+    counts and the next is the ratio expressed as a decimal form. First column 
+    that doesn't get further addressed here; each set of coupled two columns get 
+    combined into one where ratio as a percent and counts in a single new cell 
+    that gets the first part of the name of each coupled column set.
     '''
     assert (len(row_items)-1) % 2 == 0, ("There should be an even number of "
         "items in the row, discounting first column.")
@@ -292,11 +292,11 @@ def df_subgroups_states2summary_df(
 
     Takes the following:
     - name of a dataframe file (string) or a dataframe
-    - text of name of column to use as main grouping. This will become the 
-    rows in the resulting summary.
-    - text of name of column to use in states/subgroupings . These will 
-    determine the groupings shown in the columns with count and ratios/percents 
-    for each one if using default settings.
+    - label of column to use as main grouping. This will become the rows in the 
+    resulting summary.
+    - label of column to use in states/subgroupings. These will determine the 
+    groupings shown in the columns with count and ratios/percents for each one 
+    if using default settings.
     - Optionlly specify an order to list the states subgroups by providing a 
     Python list as `order`.
     - Optionally, set things to not show the counts for each state/subgroup and
@@ -530,19 +530,18 @@ if __name__ == "__main__":
         extension. \
         ", metavar="DF_FILE")
 
-    parser.add_argument("groups_col", help="Text indicating column in \
-        dataframe to use as main grouping categories.\
+    parser.add_argument("groups_col", help="Label of column in dataframe (or \
+        data table) to use as main grouping categories.\
         ", metavar="GROUPS")
 
-    parser.add_argument("subgroups_col", help="Text indicating column in \
-        dataframe to use as subgroupings / states for the groups.\
+    parser.add_argument("subgroups_col", help="Label of column in dataframe \
+        (or data table) to use as subgroupings / states for the groups.\
         ", metavar="SUBGROUPS")
 
     parser.add_argument('-ord', '--order', action='store', type=str, 
         help="This flag is used to specify that you want to control the order \
         of the subgroups to read from left to right. Follow the flag with an \
-        order listing, left to right, \
-        of the subgroup identifiers separated by \
+        order listing, left to right, of the subgroup labels separated by \
         commas, without spaces or quotes. For example `-ord yes,maybe,no`. \
          ")# based on https://stackoverflow.com/a/24866869/8508004
 
@@ -558,7 +557,7 @@ if __name__ == "__main__":
         percent & count data will be combined into one cell as a string which \
         is not suitable for further use. Because of that this option will also \
         produce a more basic summary table to be used for further efforts. Use \
-        of  `--only_subgrp_ratio` renders this argument moot as nothing \
+        of `--only_subgrp_ratio` renders this argument moot as nothing \
         concerning counts is displayed in that case.",
         action="store_true")
 

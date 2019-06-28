@@ -256,10 +256,10 @@ def put_counts_in_brackets_after_perc(row_items):
     '''
     Takes a row of summarized data where the first column is a total number and 
     each set of two columns after that is a coupled set where the first is the 
-    counts and the next is the ratio as a decima. First column that doesn't get 
-    further addressed here; each set of coupled two columns get combined into 
-    one where ratio as a percent and counts in a single new cell that gets the 
-    first part of the name of each coupled column set.
+    counts and the next is the ratio expressed as a decimal form. First column 
+    that doesn't get further addressed here; each set of coupled two columns get 
+    combined into one where ratio as a percent and counts in a single new cell 
+    that gets the first part of the name of each coupled column set.
     '''
     assert (len(row_items)-1) % 2 == 0, ("There should be an even number of "
         "items in the row, discounting first column.")
@@ -296,14 +296,14 @@ def df_binary_states2summary_df(
 
     Takes the following:
     - name of a dataframe file (string) or a dataframe
-    - text of name of column to use as main grouping. This will become the 
-    rows in the resulting summary.
-    - text of name of column to use in states/subgroupings . These will 
-    determine the groupings shown in the columns with count and ratios/percents 
-    for each one if using default settings.
-    - the subgroup/state to feature in the final summary. The idea is that this
-    is the positive/presence to aspect you want to feature where the other 
-    trait is then inferred by subtraction from 100%.
+    - label of column to use as main grouping. This will become the rows in the 
+    resulting summary.
+    - label of column to use in states/subgroupings . These will determine the 
+    groupings shown in the columns with count and ratios/percents for each one 
+    if using default settings.
+    - the specific label for the subgroup/state to feature in the final summary. 
+    The idea is that this is the positive/presence to aspect you want to feature 
+    where the other trait is then inferred by subtraction from 100%.
     - Optionally, set things to not show the counts for each state/subgroup and
     instead just leave the ratio in decimal form for each. Set with 
     `only_subgrp_ratio=True`.
@@ -566,15 +566,15 @@ if __name__ == "__main__":
         extension. \
         ", metavar="DF_FILE")
 
-    parser.add_argument("groups_col", help="Text indicating column in \
-        dataframe to use as main grouping categories.\
+    parser.add_argument("groups_col", help="Label of column in dataframe (or \
+        data table) to use as main grouping categories.\
         ", metavar="GROUPS")
 
-    parser.add_argument("states_col", help="Text indicating column in \
-        dataframe to use as the binary states.\
+    parser.add_argument("states_col", help="Label of column in dataframe (or \
+        data table) to use as the binary states.\
         ", metavar="STATES_COL")
 
-    parser.add_argument("display_state", help="Text indicating corresponding \
+    parser.add_argument("display_state", help="Specific label corresponding to \
         'positive' state (subgrouping) that will have corresponding values \
         displayed in summary with other state left as inferred. For example, if\
         states possible are 'yes' or 'no', you'd want to display \
@@ -584,9 +584,9 @@ if __name__ == "__main__":
     parser.add_argument("-olsr", "--only_subgrp_ratio",help=
         "add this flag to only leave states/subgroups ratio values in produced \
         data table. No counts will be included for each state/subgrouping. \
-        When this is used the column will get name of the `states_col` applied \
-        as it shows the percent corresponding to the 'positive'/'featured' \
-        state in the column.",
+        When this is used the column will get `states_col` label applied \
+        as it shows the ration in decimal form corresponding to the \
+        'positive'/'featured' state in the column.",
         action="store_true")
 
     parser.add_argument("-bc", "--bracket_counts",help=
@@ -598,7 +598,7 @@ if __name__ == "__main__":
         produce a more basic summary table to be used for further efforts. \
         When this is used the column will get name of the `states_col` applied \
         as it shows the percent corresponding to the 'positive' state in the \
-        column. Use of  `--only_subgrp_ratio` renders this argument moot as \
+        column. Use of `--only_subgrp_ratio` renders this argument moot as \
         nothing concerning counts is displayed in that case.",
         action="store_true")
 
