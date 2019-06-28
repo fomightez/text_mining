@@ -13,9 +13,9 @@ __version__ = "0.1.0"
 # Python 3. 
 #
 #
-# PURPOSE: Takes a dataframe, and some information about columns in the 
-# dataframe and makes a summary data table with the percents for each 
-# subgrouping state per total and each group. 
+# PURPOSE: Takes a dataframe or data table, and some information about columns 
+# in the data table and makes a summary data table with the ratio or percents 
+# for each subgrouping state per total and each group. 
 # The dataframe can also be provided as pickled or text form saved as a file.
 #
 #
@@ -256,10 +256,10 @@ def put_counts_in_brackets_after_perc(row_items):
     '''
     Takes a row of summarized data where the first column is a total number and 
     each set of two columns after that is a coupled set where the first is the 
-    counts and the next is the percent. First column that doesn't get further 
-    addressed here; each set of coupled two columns get combined into one where 
-    percent and counts in a single new cell that gets the first part of the 
-    name of each coupled column set.
+    counts and the next is the ratio as a decimal. First column that doesn't get 
+    further addressed here; each set of coupled two columns get combined into 
+    one where ratio as a percent and counts in a single new cell that gets the 
+    first part of the name of each coupled column set.
     '''
     assert (len(row_items)-1) % 2 == 0, ("There should be an even number of "
         "items in the row, discounting first column.")
@@ -281,12 +281,12 @@ def put_counts_in_brackets_after_perc(row_items):
 
 def df_subgroups_states2summary_df(
     df_file=None, df=None, groups_col=None, subgroups_col=None,order=None,
-    only_subgrp_perc=False, bracket_counts=False, 
+    only_subgrp_ratio=False, bracket_counts=False, 
     save_name_prefix = save_name_prefix):
     '''
     Takes a dataframe with some information on groups and subgroupings/states &
-    makes a summary data table the percents for each subgrouping per total and 
-    each group.
+    makes a summary data table the ratio or percents for each subgrouping per 
+    total and each group.
 
     The dataframe can also be provided as pickled or text form saved as a file.
 
@@ -295,12 +295,12 @@ def df_subgroups_states2summary_df(
     - text of name of column to use as main grouping. This will become the 
     rows in the resulting summary.
     - text of name of column to use in states/subgroupings . These will 
-    determine the groupings shown in the columns with count and percents for
-    each one if using default settings.
+    determine the groupings shown in the columns with count and ratios/percents 
+    for each one if using default settings.
     - Optionlly specify an order to list the states subgroups by providing a 
     Python list as `order`.
     - Optionally, set things to not show the counts for each state/subgroup and
-    instead just leave the percent for each. Set with `only_subgrp_perc=True`.
+    instead just leave the ratio for each. Set with `only_subgrp_ratio=True`.
     - Optionally, make at least one resulting summary that has counts bracketed 
     after the percent for the state/subgroup. This output is only meant for 
     presentation, and so a simpler one ready for further use is also made in 
@@ -399,16 +399,16 @@ def df_subgroups_states2summary_df(
     #and percent
     tuples = [("",almostfinal_df.columns[0])] + list(zip([x.rsplit(
         "_")[0] for x in almostfinal_df.columns[1:]],itertools.cycle(
-        ["count","%"])))
+        ["count","ratio"])))
     the_multiindex = pd.MultiIndex.from_tuples(tuples)
     df2 = almostfinal_df.set_axis(the_multiindex, axis=1, inplace=False)#merging
     # the multiindex into the already created dataframe based on 
     # https://stackoverflow.com/a/49909924/8508004
 
     # leave only percents or bracket the counts for presentation if specified
-    if only_subgrp_perc:
+    if only_subgrp_ratio:
         df2 = df2.iloc[:, df2.columns.get_level_values(
-        1).isin({"[n]","%"})] #based on 
+        1).isin({"[n]","ratio"})] #based on 
         # https://stackoverflow.com/a/18470819/8508004; related to 
         # https://stackoverflow.com/a/25190070/8508004
         new_col = list(df2.columns.get_level_values(0))
@@ -493,7 +493,7 @@ def main():
     # assigned multiple times depending how many scripts imported/pasted in.
     kwargs = {}
     kwargs['order'] = order
-    kwargs['only_subgrp_perc'] = args.only_subgrp_perc
+    kwargs['only_subgrp_ratio'] = args.only_subgrp_ratio
     kwargs['bracket_counts'] = args.bracket_counts
 
     df_subgroups_states2summary_df(
@@ -515,9 +515,10 @@ if __name__ == "__main__":
     import argparse
     parser = argparse.ArgumentParser(prog='df_subgroups_states2summary_df.py',
         description="df_subgroups_states2summary_df.py \
-        takes a dataframe, and some information about columns in the dataframe \
-        and makes a summary data table with the percents for each subgrouping \
-        / state per total and each group. \
+        takes a dataframe (or data table), and some information about columns \
+        in the data table \
+        and makes a summary data table with the ratio or percents for each \
+        subgrouping / state per total and each group. \
         **** Script by Wayne Decatur   \
         (fomightez @ github) ***")
 
@@ -544,9 +545,9 @@ if __name__ == "__main__":
         commas, without spaces or quotes. For example `-ord yes,maybe,no`. \
          ")# based on https://stackoverflow.com/a/24866869/8508004
 
-    parser.add_argument("-olsp", "--only_subgrp_perc",help=
-        "add this flag to only leave states/percentage data in produced data \
-        table. No counts will be included for each state/subgrouping.",
+    parser.add_argument("-olsr", "--only_subgrp_ratio",help=
+        "add this flag to only leave states/subgroups ratio values in produced \
+        data table. No counts will be included for each state/subgrouping.",
         action="store_true")
 
     parser.add_argument("-bc", "--bracket_counts",help=
@@ -555,7 +556,7 @@ if __name__ == "__main__":
         percent & count data will be combined into one cell as a string which \
         is not suitable for further use. Because of that this option will also \
         produce a more basic summary table to be used for further efforts. Use \
-        of  `--only_subgrp_perc` renders this argument moot as nothing \
+        of  `--only_subgrp_ratio` renders this argument moot as nothing \
         concerning counts is displayed in that case.",
         action="store_true")
 
