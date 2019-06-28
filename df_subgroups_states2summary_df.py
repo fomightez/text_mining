@@ -300,7 +300,8 @@ def df_subgroups_states2summary_df(
     - Optionlly specify an order to list the states subgroups by providing a 
     Python list as `order`.
     - Optionally, set things to not show the counts for each state/subgroup and
-    instead just leave the ratio for each. Set with `only_subgrp_ratio=True`.
+    instead just leave the ratio in decimal form for each. Set with `
+    only_subgrp_ratio=True`.
     - Optionally, make at least one resulting summary that has counts bracketed 
     after the percent for the state/subgroup. This output is only meant for 
     presentation, and so a simpler one ready for further use is also made in 
@@ -551,8 +552,9 @@ if __name__ == "__main__":
         action="store_true")
 
     parser.add_argument("-bc", "--bracket_counts",help=
-        "add this flag to display counts in brackets AFTER the percent listing \
-        This is only meant for generating presentation style dataframes as the \
+        "add this flag to display counts in brackets AFTER the percent \
+        listing.This is only meant for generating presentation style \
+        dataframes as the \
         percent & count data will be combined into one cell as a string which \
         is not suitable for further use. Because of that this option will also \
         produce a more basic summary table to be used for further efforts. Use \

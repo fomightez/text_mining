@@ -590,8 +590,9 @@ if __name__ == "__main__":
         action="store_true")
 
     parser.add_argument("-bc", "--bracket_counts",help=
-        "add this flag to display counts in brackets AFTER the percent listing \
-        This is only meant for generating presentation style dataframes as the \
+        "add this flag to display counts in brackets AFTER the percent \
+        listing. This is only meant for generating presentation style \
+        dataframes as the \
         percent & count data will be combined into one cell as a string which \
         is not suitable for further use. Because of that this option will also \
         produce a more basic summary table to be used for further efforts. \
