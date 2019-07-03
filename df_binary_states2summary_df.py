@@ -452,9 +452,13 @@ def df_binary_states2summary_df(
         # multiindex yet and all columns are distinct names;could collapse 
         # column levels of df2 but then non-uniuqe names
         df3  = bc_df.apply(put_counts_in_brackets_after_perc, axis=1)
+        df3['[n]'] = df3['[n]'].astype(dtype='int64') # I think because most are
+        # floats when use apply and make new dataframe the `[n]` column is 
+        # getting cast to `float64` (as evidenced by printing `bc_df.dtypes` 
+        # before the apply and `df3.dtypes` after it.) That casts it back.
         subset_list = [x for x in df3.columns if x[-2:] not in ['_c', '_p']]
         df3 = df3[subset_list]
-        # since went back to `almostfinal_df` for this, also have to subst to 
+        # since went back to `almostfinal_df` for this, also have to subset to 
         # choice for state to display
         subset_list = [x for x in df3.columns if x in ['[n]',display_state]]
         df3 = df3[subset_list]
