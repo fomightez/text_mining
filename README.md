@@ -442,7 +442,7 @@ Though it is currently configured to only focus on a directory of files, you can
 
 Typical input and result (**the red annoation is just for illustration**):
 
-![data_table](https://raw.githubusercontent.com/fomightez/dataframe2summary/master/imgs/?)  
+![data_table](https://raw.githubusercontent.com/fomightez/dataframe2summary/master/imgs/text_subgrp_example.png)  
 
 See [here](https://github.com/fomightez/dataframe2summary) for more examples and to launch a demonstration session.
 
