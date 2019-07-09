@@ -446,7 +446,7 @@ Typical input and result (**the red annoation is just for illustration**):
 
 See [here](https://github.com/fomightez/dataframe2summary) for more examples and to launch a demonstration session.
 
-It's use is compared/contrasted with donut plots with the same data [here](https://nbviewer.jupyter.org/github/fomightez/donut_plots_with_subgroups/blob/master/index.ipynb) and [here](https://nbviewer.jupyter.org/github/fomightez/donut_plots_with_subgroups/blob/master/demo_summary_subgroups.ipynb). Those notebooks can be launched in active form via the Binder service [here](https://github.com/fomightez/donut_plots_with_subgroups). Depending on the formatting of the data table output the summary data table and the donut plot can be complementary, too.
+It's use is compared/contrasted with donut plots summarizing data [here](https://nbviewer.jupyter.org/github/fomightez/donut_plots_with_subgroups/blob/master/index.ipynb) and [here](https://nbviewer.jupyter.org/github/fomightez/donut_plots_with_subgroups/blob/master/demo_summary_subgroups.ipynb). Those notebooks can be launched in active form via the Binder service [here](https://github.com/fomightez/donut_plots_with_subgroups). Depending on the formatting of the data table output the summary data table and the donut plot **can both be complementary**, too.
 
 ---
 
@@ -462,7 +462,7 @@ Typical input and result (**the red annoation is just for illustration**):
 
 See [here](https://github.com/fomightez/dataframe2summary) for more examples and to launch a demonstration session.
 
-It's use is compared/contrasted with a donut plot with the same data [here](https://nbviewer.jupyter.org/github/fomightez/donut_plots_with_subgroups/blob/master/demo_summary_binary.ipynb). That notebook can be launched in active form via the Binder service [here](https://github.com/fomightez/donut_plots_with_subgroups).  Depending on the formatting of the data table output the summary data table and the donut plot can be complementary, too.
+It's use is compared/contrasted with a donut plot summarizing data [here](https://nbviewer.jupyter.org/github/fomightez/donut_plots_with_subgroups/blob/master/demo_summary_binary.ipynb). That notebook can be launched in active form via the Binder service [here](https://github.com/fomightez/donut_plots_with_subgroups).  Depending on the formatting of the data table output the summary data table and the donut plot **can both be complementary**, too.
 
 ---
 
