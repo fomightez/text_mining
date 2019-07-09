@@ -450,6 +450,12 @@ It's use is compared/contrasted with donut plots with the same data [here](https
 
 Only works with binary states / subgroups because summarizes even further than `df_subgroups_states2summary_df.py` to just leave the 'positive' state and the other part is inferred by subtraction from 100%.
 
+Typical input and result (**the red annoation is just for illustration**):
+
+![data_table_binary](https://raw.githubusercontent.com/fomightez/dataframe2summary/master/imgs/text_to_binary_first_example.png)  
+
+See [here](https://github.com/fomightez/dataframe2summary) for more examples and to launch a demonstration session.
+
 It's use is compared/contrasted with a donut plot with the same data [here](https://nbviewer.jupyter.org/github/fomightez/donut_plots_with_subgroups/blob/master/demo_summary_binary.ipynb). That notebook can be launched in active form via the Binder service [here](https://github.com/fomightez/donut_plots_with_subgroups).  Depending on the formatting of the data table output the summary data table and the donut plot can be complementary, too.
 
 ---
