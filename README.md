@@ -527,6 +527,8 @@ Handy, related utilities authored by others:
 
 - [CSVtoTable](https://github.com/vividvilla/csvtotable) - Simple, Python-based command-line utility to convert CSV files to searchable and sortable HTML table. (Note that it looks like editing the function `convert` [here](https://github.com/vividvilla/csvtotable/blob/master/csvtotable/convert.py) it could be made to handle TSV files.
 
+- For summarizing dataframes by 'exploration' approach, see [pandas-profiling in action](https://twitter.com/justmarkham/status/1155840938356432896).
+
 - Use Vennerable in R, example with summarized data (like I have in [my gist here](https://gist.github.com/fomightez/5575a91be88955257ba1f658ff253197)) by Ming Tang at https://twitter.com/tangming2005/status/1141746845460258817
 
 Related Web Tool
