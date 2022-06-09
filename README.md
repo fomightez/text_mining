@@ -531,6 +531,8 @@ Handy, related utilities authored by others:
 
 - Use Vennerable in R, example with summarized data (like I have in [my gist here](https://gist.github.com/fomightez/5575a91be88955257ba1f658ff253197)) by Ming Tang at https://twitter.com/tangming2005/status/1141746845460258817
 
+- [gget enrichr](https://github.com/pachterlab/gget) is a module that is part of [gget](https://github.com/pachterlab/gget). [gget enrichr](https://github.com/pachterlab/gget) performs an enrichment analysis on a list of genes using Enrichr. (related code by me, see [delineate_properties_of_yeast_snoRNAs_in_gene_list.py](https://github.com/fomightez/yeast_snornas) that checks for enrichment of various categories of yeast snoRNAs)
+
 Related Web Tool
 ----------------
 
