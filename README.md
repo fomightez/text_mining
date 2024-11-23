@@ -481,7 +481,7 @@ Presently a user-unfriendly utility script that needs the list of files hard-cod
 
 Presently a simple utility function to work in a Jupyter notebook.  
 Content & Arrangement of output inspired in a significant way by 'Rank list' accessible clicking `Hide sample files and parameters [-]` at [Rank Rank Hypergeometric Overlap:Graeber Lab Homepage:Simple Version(RRHO)](http://systems.crump.ucla.edu/rankrank/rankranksimple.php).  
-See the documentation within the header of the script for more information. Alternatively, because a demonstration is often with more than a lot of words...  
+See the documentation within the header of the script for more information. Alternatively, because a demonstration is often worth more than a lot of words...  
 I made launchable notebook demonstrating its abilities with a list of yeast genes [here](https://github.com/fomightez/ranked_list_comparison_demo). In developing it, I used my [make_simulated_yeast_gene_set.py](https://github.com/fomightez/yeastmine/blob/master/make_simulated_yeast_gene_set.py) script to make a mock gene list.
 
 ---
