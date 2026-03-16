@@ -402,9 +402,10 @@ def df_subgroups_states2summary_df(
         "_")[0] for x in almostfinal_df.columns[1:]],itertools.cycle(
         ["count","ratio"])))
     the_multiindex = pd.MultiIndex.from_tuples(tuples)
-    df2 = almostfinal_df.set_axis(the_multiindex, axis=1, inplace=False)#merging
+    df2 = almostfinal_df.set_axis(the_multiindex, axis=1)#merging
     # the multiindex into the already created dataframe based on 
     # https://stackoverflow.com/a/49909924/8508004
+    # UPDATE: `inplace=False` removed March 2026 because was causing error that keyword not recognized; probably due to recent updates to Pandas deprecating things over the last few years.
 
     # leave only percents or bracket the counts for presentation if specified
     if only_subgrp_ratio:
