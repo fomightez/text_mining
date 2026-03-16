@@ -424,6 +424,7 @@ def df_binary_states2summary_df(
     df2 = almostfinal_df.set_axis(the_multiindex, axis=1, inplace=False)#merging
     # the multiindex into the already created dataframe based on 
     # https://stackoverflow.com/a/49909924/8508004
+    # UPDATE: `inplace=False` above removed March 2026 because was causing error that keyword not recognized; probably due to recent updates to Pandas deprecating things over the last few years.
     # Restrict to just the state want to display
     #df2 = df2[display_state] # <--Interestingly this worked if just wanted the 
     # display state columns to remain (so it must default to the zero level to 
